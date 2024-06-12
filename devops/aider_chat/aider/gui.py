@@ -270,23 +270,178 @@ class GUI:
                 cluster_name = st.text_input("Cluster Name", "my-cluster")
                 namespaces = st.text_input("Namespaces (comma separated)", "default, production")
                 additional_input = f"Deployment Name: {deployment_name}\nContainer Image: {container_image}\nCluster Name: {cluster_name}\nNamespaces: {namespaces}"
+
             elif feature == "Create CI/CD Pipeline":
-                pipeline_name = st.text_input("Pipeline Name", "CI/CD Pipeline")
-                stages = st.text_area("Stages (comma separated)", "build, test, deploy")
-                additional_input = f"Pipeline Name: {pipeline_name}\nStages: {stages}"
+                provider = st.selectbox(
+                    "Select a CI/CD Provider",
+                    [
+                        "Select a Provider",  # Default option
+                        "GitHub Actions",
+                        "GitLab CI",
+                        "Jenkins",
+                        "CircleCI",
+                        "Travis CI",
+                        "Azure Pipelines",
+                        "AWS CodePipeline",
+                        "Google Cloud Build",
+                        "Bitbucket Pipelines"
+                    ]
+                )
+
+                if provider == "GitHub Actions":
+                    st.markdown("### GitHub Actions CI/CD Pipeline")
+                    st.write("Configure your CI/CD pipeline using GitHub Actions.")
+                    pipeline_name = st.text_input("Pipeline Name", "GitHub Actions Pipeline")
+                    stages = st.text_area("Stages (comma separated)", "build, test, deploy")
+                    additional_input = f"Pipeline Name: {pipeline_name}\nProvider: GitHub Actions\nStages: {stages}"
+                elif provider == "GitLab CI":
+                    st.markdown("### GitLab CI/CD Pipeline")
+                    st.write("Configure your CI/CD pipeline using GitLab CI.")
+                    pipeline_name = st.text_input("Pipeline Name", "GitLab CI Pipeline")
+                    stages = st.text_area("Stages (comma separated)", "build, test, deploy")
+                    additional_input = f"Pipeline Name: {pipeline_name}\nProvider: GitLab CI\nStages: {stages}"
+                elif provider == "Jenkins":
+                    st.markdown("### Jenkins CI/CD Pipeline")
+                    st.write("Configure your CI/CD pipeline using Jenkins.")
+                    pipeline_name = st.text_input("Pipeline Name", "Jenkins Pipeline")
+                    stages = st.text_area("Stages (comma separated)", "build, test, deploy")
+                    additional_input = f"Pipeline Name: {pipeline_name}\nProvider: Jenkins\nStages: {stages}"
+                elif provider == "CircleCI":
+                    st.markdown("### CircleCI CI/CD Pipeline")
+                    st.write("Configure your CI/CD pipeline using CircleCI.")
+                    pipeline_name = st.text_input("Pipeline Name", "CircleCI Pipeline")
+                    stages = st.text_area("Stages (comma separated)", "build, test, deploy")
+                    additional_input = f"Pipeline Name: {pipeline_name}\nProvider: CircleCI\nStages: {stages}"
+                elif provider == "Travis CI":
+                    st.markdown("### Travis CI/CD Pipeline")
+                    st.write("Configure your CI/CD pipeline using Travis CI.")
+                    pipeline_name = st.text_input("Pipeline Name", "Travis CI Pipeline")
+                    stages = st.text_area("Stages (comma separated)", "build, test, deploy")
+                    additional_input = f"Pipeline Name: {pipeline_name}\nProvider: Travis CI\nStages: {stages}"
+                elif provider == "Azure Pipelines":
+                    st.markdown("### Azure Pipelines CI/CD Pipeline")
+                    st.write("Configure your CI/CD pipeline using Azure Pipelines.")
+                    pipeline_name = st.text_input("Pipeline Name", "Azure Pipelines")
+                    stages = st.text_area("Stages (comma separated)", "build, test, deploy")
+                    additional_input = f"Pipeline Name: {pipeline_name}\nProvider: Azure Pipelines\nStages: {stages}"
+                elif provider == "AWS CodePipeline":
+                    st.markdown("### AWS CodePipeline CI/CD Pipeline")
+                    st.write("Configure your CI/CD pipeline using AWS CodePipeline.")
+                    pipeline_name = st.text_input("Pipeline Name", "AWS CodePipeline")
+                    stages = st.text_area("Stages (comma separated)", "build, test, deploy")
+                    additional_input = f"Pipeline Name: {pipeline_name}\nProvider: AWS CodePipeline\nStages: {stages}"
+                elif provider == "Google Cloud Build":
+                    st.markdown("### Google Cloud Build CI/CD Pipeline")
+                    st.write("Configure your CI/CD pipeline using Google Cloud Build.")
+                    pipeline_name = st.text_input("Pipeline Name", "Google Cloud Build Pipeline")
+                    stages = st.text_area("Stages (comma separated)", "build, test, deploy")
+                    additional_input = f"Pipeline Name: {pipeline_name}\nProvider: Google Cloud Build\nStages: {stages}"
+                elif provider == "Bitbucket Pipelines":
+                    st.markdown("### Bitbucket Pipelines CI/CD Pipeline")
+                    st.write("Configure your CI/CD pipeline using Bitbucket Pipelines.")
+                    pipeline_name = st.text_input("Pipeline Name", "Bitbucket Pipelines")
+                    stages = st.text_area("Stages (comma separated)", "build, test, deploy")
+                    additional_input = f"Pipeline Name: {pipeline_name}\nProvider: Bitbucket Pipelines\nStages: {stages}"
+ 
             elif feature == "Azure Configuration":
-                service = st.selectbox("Select Azure Service", ["Select Service", "Hosting", "Networking", "IAM", "Database"])
+                service = st.selectbox(
+                    "Select Azure Service",
+                    [
+                        "Select Service",  # Default option
+                        "Hosting",
+                        "Networking",
+                        "IAM",
+                        "Database",
+                        "Storage",
+                        "DevOps",
+                        "AI & Machine Learning",
+                        "Monitoring",
+                        "Security"
+                    ]
+                )
                 if service == "Hosting":
+                    st.markdown("### Azure Hosting Configuration")
                     resource_group = st.text_input("Resource Group", "my-resource-group")
                     app_service_name = st.text_input("App Service Name", "my-app-service")
                     region = st.text_input("Region", "East US")
-                    additional_input = f"Resource Group: {resource_group}\nApp Service Name: {app_service_name}\nRegion: {region}"
+                    sku = st.selectbox("Pricing Tier (SKU)", ["F1", "B1", "B2", "B3", "S1", "S2", "S3", "P1v2", "P2v2", "P3v2"])
+                    os_type = st.selectbox("Operating System", ["Windows", "Linux"])
+                    runtime_stack = st.selectbox("Runtime Stack", [".NET", "Node", "Python", "Java", "PHP", "Ruby"])
+                    additional_input = f"Resource Group: {resource_group}\nApp Service Name: {app_service_name}\nRegion: {region}\nPricing Tier: {sku}\nOperating System: {os_type}\nRuntime Stack: {runtime_stack}"
                 elif service == "Networking":
+                    st.markdown("### Azure Networking Configuration")
                     resource_group = st.text_input("Resource Group", "my-resource-group")
                     vnet_name = st.text_input("VNet Name", "my-vnet")
+                    address_space = st.text_input("Address Space", "10.0.0.0/16")
                     subnet_name = st.text_input("Subnet Name", "my-subnet")
-                    additional_input = f"Resource Group: {resource_group}\nVNet Name: {vnet_name}\nSubnet Name: {subnet_name}"
-                # Add more services as needed
+                    subnet_address = st.text_input("Subnet Address", "10.0.1.0/24")
+                    nsg_name = st.text_input("Network Security Group (NSG) Name", "my-nsg")
+                    additional_input = f"Resource Group: {resource_group}\nVNet Name: {vnet_name}\nAddress Space: {address_space}\nSubnet Name: {subnet_name}\nSubnet Address: {subnet_address}\nNSG Name: {nsg_name}"
+                elif service == "IAM":
+                    st.markdown("### Azure IAM Configuration")
+                    resource_group = st.text_input("Resource Group", "my-resource-group")
+                    role_assignment_name = st.text_input("Role Assignment Name", "my-role-assignment")
+                    role_definition = st.selectbox("Role Definition", ["Owner", "Contributor", "Reader", "User Access Administrator"])
+                    principal_id = st.text_input("Principal ID (User/Service Principal ID)", "user-or-sp-id")
+                    scope = st.text_input("Scope", "/subscriptions/{subscription-id}/resourceGroups/{resource-group}")
+                    additional_input = f"Resource Group: {resource_group}\nRole Assignment Name: {role_assignment_name}\nRole Definition: {role_definition}\nPrincipal ID: {principal_id}\nScope: {scope}"
+                elif service == "Database":
+                    st.markdown("### Azure Database Configuration")
+                    resource_group = st.text_input("Resource Group", "my-resource-group")
+                    db_type = st.selectbox("Database Type", ["SQL Database", "Cosmos DB", "MySQL", "PostgreSQL", "MariaDB"])
+                    if db_type == "SQL Database":
+                        db_name = st.text_input("Database Name", "my-sql-db")
+                        server_name = st.text_input("Server Name", "my-sql-server")
+                        collation = st.text_input("Collation", "SQL_Latin1_General_CP1_CI_AS")
+                        additional_input = f"Resource Group: {resource_group}\nDatabase Type: SQL Database\nDatabase Name: {db_name}\nServer Name: {server_name}\nCollation: {collation}"
+                    elif db_type == "Cosmos DB":
+                        account_name = st.text_input("Account Name", "my-cosmos-account")
+                        consistency_level = st.selectbox("Consistency Level", ["Strong", "Bounded Staleness", "Session", "Consistent Prefix", "Eventual"])
+                        additional_input = f"Resource Group: {resource_group}\nDatabase Type: Cosmos DB\nAccount Name: {account_name}\nConsistency Level: {consistency_level}"
+                    elif db_type == "MySQL":
+                        server_name = st.text_input("Server Name", "my-mysql-server")
+                        version = st.selectbox("Version", ["5.6", "5.7", "8.0"])
+                        additional_input = f"Resource Group: {resource_group}\nDatabase Type: MySQL\nServer Name: {server_name}\nVersion: {version}"
+                    elif db_type == "PostgreSQL":
+                        server_name = st.text_input("Server Name", "my-postgresql-server")
+                        version = st.selectbox("Version", ["9.6", "10", "11", "12", "13"])
+                        additional_input = f"Resource Group: {resource_group}\nDatabase Type: PostgreSQL\nServer Name: {server_name}\nVersion: {version}"
+                    elif db_type == "MariaDB":
+                        server_name = st.text_input("Server Name", "my-mariadb-server")
+                        version = st.selectbox("Version", ["10.2", "10.3", "10.4", "10.5"])
+                        additional_input = f"Resource Group: {resource_group}\nDatabase Type: MariaDB\nServer Name: {server_name}\nVersion: {version}"
+                elif service == "Storage":
+                    st.markdown("### Azure Storage Configuration")
+                    resource_group = st.text_input("Resource Group", "my-resource-group")
+                    storage_account_name = st.text_input("Storage Account Name", "mystorageaccount")
+                    sku = st.selectbox("SKU", ["Standard_LRS", "Standard_GRS", "Standard_RAGRS", "Premium_LRS"])
+                    access_tier = st.selectbox("Access Tier", ["Hot", "Cool"])
+                    additional_input = f"Resource Group: {resource_group}\nStorage Account Name: {storage_account_name}\nSKU: {sku}\nAccess Tier: {access_tier}"
+                elif service == "DevOps":
+                    st.markdown("### Azure DevOps Configuration")
+                    project_name = st.text_input("Project Name", "my-devops-project")
+                    repo_name = st.text_input("Repository Name", "my-repo")
+                    pipeline_name = st.text_input("Pipeline Name", "my-pipeline")
+                    additional_input = f"Project Name: {project_name}\nRepository Name: {repo_name}\nPipeline Name: {pipeline_name}"
+                elif service == "AI & Machine Learning":
+                    st.markdown("### Azure AI & Machine Learning Configuration")
+                    workspace_name = st.text_input("Workspace Name", "my-ml-workspace")
+                    resource_group = st.text_input("Resource Group", "my-resource-group")
+                    region = st.text_input("Region", "East US")
+                    additional_input = f"Workspace Name: {workspace_name}\nResource Group: {resource_group}\nRegion: {region}"
+                elif service == "Monitoring":
+                    st.markdown("### Azure Monitoring Configuration")
+                    resource_group = st.text_input("Resource Group", "my-resource-group")
+                    log_analytics_workspace = st.text_input("Log Analytics Workspace", "my-log-analytics")
+                    alert_rules = st.text_area("Alert Rules (comma separated)", "High CPU,Low Memory")
+                    additional_input = f"Resource Group: {resource_group}\nLog Analytics Workspace: {log_analytics_workspace}\nAlert Rules: {alert_rules}"
+                elif service == "Security":
+                    st.markdown("### Azure Security Configuration")
+                    resource_group = st.text_input("Resource Group", "my-resource-group")
+                    security_center_policy = st.text_area("Security Center Policy", "Enable all security recommendations")
+                    additional_input = f"Resource Group: {resource_group}\nSecurity Center Policy: {security_center_policy}"
+
+
             elif feature == "AWS Configuration":
                 service = st.selectbox("Select AWS Service", ["Select Service", "Hosting", "Networking", "IAM", "Database"])
                 if service == "Hosting":
@@ -338,11 +493,95 @@ class GUI:
                     project_name = st.text_input("Project Name", "my-cloudflare-project")
                     security_features = st.text_area("Security Features", "WAF, DDoS Protection")
                     additional_input = f"Project Name: {project_name}\nSecurity Features: {security_features}"
-                # Add more services as needed
+
             elif feature == "Developer Configuration":
-                config_name = st.text_input("Configuration Name", "Dev Environment")
-                details = st.text_area("Configuration Details", "VS Code, Docker, Git")
-                additional_input = f"Configuration Name: {config_name}\nDetails: {details}"
+                language = st.selectbox(
+                    "Select a Language",
+                    [
+                        "Select a Language",  # Default option
+                        "Python",
+                        "Node.js",
+                        "Java",
+                        "Rust",
+                        "Go",
+                        "C#",
+                        "Ruby",
+                        "PHP",
+                        "C++"
+                    ]
+                )
+
+                if language == "Python":
+                    st.markdown("### Python Development Environment")
+                    st.write("Configure your Python development environment with VS Code settings.")
+                    config_name = st.text_input("Configuration Name", "Python Dev Environment")
+                    extensions = st.text_area("VS Code Extensions", "ms-python.python, ms-toolsai.jupyter")
+                    settings = st.text_area("VS Code Settings", "{\n    \"python.pythonPath\": \"/usr/bin/python3\",\n    \"python.linting.enabled\": true\n}")
+                    additional_input = f"Language: Python\nConfiguration Name: {config_name}\nVS Code Extensions: {extensions}\nVS Code Settings: {settings}"
+
+                elif language == "Node.js":
+                    st.markdown("### Node.js Development Environment")
+                    st.write("Configure your Node.js development environment with VS Code settings.")
+                    config_name = st.text_input("Configuration Name", "Node.js Dev Environment")
+                    extensions = st.text_area("VS Code Extensions", "dbaeumer.vscode-eslint, esbenp.prettier-vscode")
+                    settings = st.text_area("VS Code Settings", "{\n    \"javascript.format.enable\": true,\n    \"eslint.enable\": true\n}")
+                    additional_input = f"Language: Node.js\nConfiguration Name: {config_name}\nVS Code Extensions: {extensions}\nVS Code Settings: {settings}"
+
+                elif language == "Java":
+                    st.markdown("### Java Development Environment")
+                    st.write("Configure your Java development environment with VS Code settings.")
+                    config_name = st.text_input("Configuration Name", "Java Dev Environment")
+                    extensions = st.text_area("VS Code Extensions", "vscjava.vscode-java-pack")
+                    settings = st.text_area("VS Code Settings", "{\n    \"java.home\": \"/usr/lib/jvm/java-11-openjdk-amd64\",\n    \"java.errors.incompleteClasspath.severity\": \"warning\"\n}")
+                    additional_input = f"Language: Java\nConfiguration Name: {config_name}\nVS Code Extensions: {extensions}\nVS Code Settings: {settings}"
+
+                elif language == "Rust":
+                    st.markdown("### Rust Development Environment")
+                    st.write("Configure your Rust development environment with VS Code settings.")
+                    config_name = st.text_input("Configuration Name", "Rust Dev Environment")
+                    extensions = st.text_area("VS Code Extensions", "rust-lang.rust, matklad.rust-analyzer")
+                    settings = st.text_area("VS Code Settings", "{\n    \"rust-client.channel\": \"stable\",\n    \"rust-analyzer.cargo.allFeatures\": true\n}")
+                    additional_input = f"Language: Rust\nConfiguration Name: {config_name}\nVS Code Extensions: {extensions}\nVS Code Settings: {settings}"
+
+                elif language == "Go":
+                    st.markdown("### Go Development Environment")
+                    st.write("Configure your Go development environment with VS Code settings.")
+                    config_name = st.text_input("Configuration Name", "Go Dev Environment")
+                    extensions = st.text_area("VS Code Extensions", "golang.go")
+                    settings = st.text_area("VS Code Settings", "{\n    \"go.useLanguageServer\": true,\n    \"go.lintOnSave\": \"package\"\n}")
+                    additional_input = f"Language: Go\nConfiguration Name: {config_name}\nVS Code Extensions: {extensions}\nVS Code Settings: {settings}"
+
+                elif language == "C#":
+                    st.markdown("### C# Development Environment")
+                    st.write("Configure your C# development environment with VS Code settings.")
+                    config_name = st.text_input("Configuration Name", "C# Dev Environment")
+                    extensions = st.text_area("VS Code Extensions", "ms-dotnettools.csharp")
+                    settings = st.text_area("VS Code Settings", "{\n    \"csharp.suppressDotnetRestoreNotification\": true\n}")
+                    additional_input = f"Language: C#\nConfiguration Name: {config_name}\nVS Code Extensions: {extensions}\nVS Code Settings: {settings}"
+
+                elif language == "Ruby":
+                    st.markdown("### Ruby Development Environment")
+                    st.write("Configure your Ruby development environment with VS Code settings.")
+                    config_name = st.text_input("Configuration Name", "Ruby Dev Environment")
+                    extensions = st.text_area("VS Code Extensions", "rebornix.ruby")
+                    settings = st.text_area("VS Code Settings", "{\n    \"ruby.useLanguageServer\": true,\n    \"ruby.lint\": {\n        \"rubocop\": true\n    }\n}")
+                    additional_input = f"Language: Ruby\nConfiguration Name: {config_name}\nVS Code Extensions: {extensions}\nVS Code Settings: {settings}"
+
+                elif language == "PHP":
+                    st.markdown("### PHP Development Environment")
+                    st.write("Configure your PHP development environment with VS Code settings.")
+                    config_name = st.text_input("Configuration Name", "PHP Dev Environment")
+                    extensions = st.text_area("VS Code Extensions", "felixfbecker.php-intellisense, bmewburn.vscode-intelephense-client")
+                    settings = st.text_area("VS Code Settings", "{\n    \"php.executablePath\": \"/usr/bin/php\",\n    \"php.validate.executablePath\": \"/usr/bin/php\"\n}")
+                    additional_input = f"Language: PHP\nConfiguration Name: {config_name}\nVS Code Extensions: {extensions}\nVS Code Settings: {settings}"
+
+                elif language == "C++":
+                    st.markdown("### C++ Development Environment")
+                    st.write("Configure your C++ development environment with VS Code settings.")
+                    config_name = st.text_input("Configuration Name", "C++ Dev Environment")
+                    extensions = st.text_area("VS Code Extensions", "ms-vscode.cpptools")
+                    settings = st.text_area("VS Code Settings", "{\n    \"C_Cpp.updateChannel\": \"Insiders\",\n    \"C_Cpp.intelliSenseEngine\": \"Default\"\n}")
+                    additional_input = f"Language: C++\nConfiguration Name: {config_name}\nVS Code Extensions: {extensions}\nVS Code Settings: {settings}"
 
             if st.button("Start") and feature != "Select a Feature":
                 self.start_feature(feature, additional_input, service)
@@ -377,6 +616,109 @@ class GUI:
         elif feature == "Azure Configuration":
             internal_guidance = "Include detailed resource definitions, dependencies, and parameterized templates for flexibility."
             self.prompt = f"Create an Azure Resource Manager template for {service} with details: {additional_input}. {internal_guidance}"
+        
+        elif feature == "Azure Configuration":
+            service = st.selectbox(
+                "Select Azure Service",
+                [
+                    "Select Service",  # Default option
+                    "Hosting",
+                    "Networking",
+                    "IAM",
+                    "Database",
+                    "Storage",
+                    "DevOps",
+                    "AI & Machine Learning",
+                    "Monitoring",
+                    "Security"
+                ]
+            )
+            if service == "Hosting":
+                st.markdown("### Azure Hosting Configuration")
+                resource_group = st.text_input("Resource Group", "my-resource-group")
+                app_service_name = st.text_input("App Service Name", "my-app-service")
+                region = st.text_input("Region", "East US")
+                sku = st.selectbox("Pricing Tier (SKU)", ["F1", "B1", "B2", "B3", "S1", "S2", "S3", "P1v2", "P2v2", "P3v2"])
+                os_type = st.selectbox("Operating System", ["Windows", "Linux"])
+                runtime_stack = st.selectbox("Runtime Stack", [".NET", "Node", "Python", "Java", "PHP", "Ruby"])
+                additional_input = f"Resource Group: {resource_group}\nApp Service Name: {app_service_name}\nRegion: {region}\nPricing Tier: {sku}\nOperating System: {os_type}\nRuntime Stack: {runtime_stack}"
+            elif service == "Networking":
+                st.markdown("### Azure Networking Configuration")
+                resource_group = st.text_input("Resource Group", "my-resource-group")
+                vnet_name = st.text_input("VNet Name", "my-vnet")
+                address_space = st.text_input("Address Space", "10.0.0.0/16")
+                subnet_name = st.text_input("Subnet Name", "my-subnet")
+                subnet_address = st.text_input("Subnet Address", "10.0.1.0/24")
+                nsg_name = st.text_input("Network Security Group (NSG) Name", "my-nsg")
+                additional_input = f"Resource Group: {resource_group}\nVNet Name: {vnet_name}\nAddress Space: {address_space}\nSubnet Name: {subnet_name}\nSubnet Address: {subnet_address}\nNSG Name: {nsg_name}"
+            elif service == "IAM":
+                st.markdown("### Azure IAM Configuration")
+                resource_group = st.text_input("Resource Group", "my-resource-group")
+                role_assignment_name = st.text_input("Role Assignment Name", "my-role-assignment")
+                role_definition = st.selectbox("Role Definition", ["Owner", "Contributor", "Reader", "User Access Administrator"])
+                principal_id = st.text_input("Principal ID (User/Service Principal ID)", "user-or-sp-id")
+                scope = st.text_input("Scope", "/subscriptions/{subscription-id}/resourceGroups/{resource-group}")
+                additional_input = f"Resource Group: {resource_group}\nRole Assignment Name: {role_assignment_name}\nRole Definition: {role_definition}\nPrincipal ID: {principal_id}\nScope: {scope}"
+            elif service == "Database":
+                st.markdown("### Azure Database Configuration")
+                resource_group = st.text_input("Resource Group", "my-resource-group")
+                db_type = st.selectbox("Database Type", ["SQL Database", "Cosmos DB", "MySQL", "PostgreSQL", "MariaDB"])
+                if db_type == "SQL Database":
+                    db_name = st.text_input("Database Name", "my-sql-db")
+                    server_name = st.text_input("Server Name", "my-sql-server")
+                    collation = st.text_input("Collation", "SQL_Latin1_General_CP1_CI_AS")
+                    additional_input = f"Resource Group: {resource_group}\nDatabase Type: SQL Database\nDatabase Name: {db_name}\nServer Name: {server_name}\nCollation: {collation}"
+                elif db_type == "Cosmos DB":
+                    account_name = st.text_input("Account Name", "my-cosmos-account")
+                    consistency_level = st.selectbox("Consistency Level", ["Strong", "Bounded Staleness", "Session", "Consistent Prefix", "Eventual"])
+                    additional_input = f"Resource Group: {resource_group}\nDatabase Type: Cosmos DB\nAccount Name: {account_name}\nConsistency Level: {consistency_level}"
+                elif db_type == "MySQL":
+                    server_name = st.text_input("Server Name", "my-mysql-server")
+                    version = st.selectbox("Version", ["5.6", "5.7", "8.0"])
+                    additional_input = f"Resource Group: {resource_group}\nDatabase Type: MySQL\nServer Name: {server_name}\nVersion: {version}"
+                elif db_type == "PostgreSQL":
+                    server_name = st.text_input("Server Name", "my-postgresql-server")
+                    version = st.selectbox("Version", ["9.6", "10", "11", "12", "13"])
+                    additional_input = f"Resource Group: {resource_group}\nDatabase Type: PostgreSQL\nServer Name: {server_name}\nVersion: {version}"
+                elif db_type == "MariaDB":
+                    server_name = st.text_input("Server Name", "my-mariadb-server")
+                    version = st.selectbox("Version", ["10.2", "10.3", "10.4", "10.5"])
+                    additional_input = f"Resource Group: {resource_group}\nDatabase Type: MariaDB\nServer Name: {server_name}\nVersion: {version}"
+            elif service == "Storage":
+                st.markdown("### Azure Storage Configuration")
+                resource_group = st.text_input("Resource Group", "my-resource-group")
+                storage_account_name = st.text_input("Storage Account Name", "mystorageaccount")
+                sku = st.selectbox("SKU", ["Standard_LRS", "Standard_GRS", "Standard_RAGRS", "Premium_LRS"])
+                access_tier = st.selectbox("Access Tier", ["Hot", "Cool"])
+                additional_input = f"Resource Group: {resource_group}\nStorage Account Name: {storage_account_name}\nSKU: {sku}\nAccess Tier: {access_tier}"
+            elif service == "DevOps":
+                st.markdown("### Azure DevOps Configuration")
+                project_name = st.text_input("Project Name", "my-devops-project")
+                repo_name = st.text_input("Repository Name", "my-repo")
+                pipeline_name = st.text_input("Pipeline Name", "my-pipeline")
+                additional_input = f"Project Name: {project_name}\nRepository Name: {repo_name}\nPipeline Name: {pipeline_name}"
+            elif service == "AI & Machine Learning":
+                st.markdown("### Azure AI & Machine Learning Configuration")
+                workspace_name = st.text_input("Workspace Name", "my-ml-workspace")
+                resource_group = st.text_input("Resource Group", "my-resource-group")
+                region = st.text_input("Region", "East US")
+                additional_input = f"Workspace Name: {workspace_name}\nResource Group: {resource_group}\nRegion: {region}"
+            elif service == "Monitoring":
+                st.markdown("### Azure Monitoring Configuration")
+                resource_group = st.text_input("Resource Group", "my-resource-group")
+                log_analytics_workspace = st.text_input("Log Analytics Workspace", "my-log-analytics")
+                alert_rules = st.text_area("Alert Rules (comma separated)", "High CPU,Low Memory")
+                additional_input = f"Resource Group: {resource_group}\nLog Analytics Workspace: {log_analytics_workspace}\nAlert Rules: {alert_rules}"
+            elif service == "Security":
+                st.markdown("### Azure Security Configuration")
+                resource_group = st.text_input("Resource Group", "my-resource-group")
+                security_center_policy = st.text_area("Security Center Policy", "Enable all security recommendations")
+                additional_input = f"Resource Group: {resource_group}\nSecurity Center Policy: {security_center_policy}"
+
+            if st.button("Start") and service != "Select Service":
+                self.start_feature(feature, additional_input)
+
+        
         elif feature == "AWS Configuration":
             internal_guidance = "Ensure the template includes IAM roles and policies, and follows AWS best practices for security and scalability."
             self.prompt = f"Create a CloudFormation template for {service} with details: {additional_input}. {internal_guidance}"
