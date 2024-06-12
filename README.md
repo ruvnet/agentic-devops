@@ -39,7 +39,10 @@ By automating repetitive and complex tasks, Agentic DevOps helps reduce human er
 Agentic Engineering is a modern approach to software development that integrates artificial intelligence and automation to streamline engineering processes. This methodology enhances efficiency by automating routine tasks, optimizing resource allocation, and providing intelligent insights to support decision-making. By leveraging AI, Agentic Engineering helps development teams achieve higher productivity, better code quality, and faster time-to-market, making it an invaluable tool in today's fast-paced technology landscape.
 
 ## Installation
-
+```
+pip install agentic-devops
+```
+o
 To install the Agentic DevOps tool, follow these steps:
 
 1. **Clone the repository:**
@@ -84,17 +87,7 @@ The Agentic DevOps tool requires certain environment variables to be set for aut
 You can set these environment variables either in your system environment or by creating a `.env` file in the project root directory. Here is an example of a `.env` file:
 
 ```plaintext
-AZURE_CLIENT_ID=your-azure-client-id
-AZURE_CLIENT_SECRET=your-azure-client-secret
-AZURE_APP_CONFIG_CON_STR=your-azure-app-config-connection-string
-AWS_ACCESS_KEY_ID=your-aws-access-key-id
-AWS_SECRET_ACCESS_KEY=your-aws-secret-access-key
-GCP_PROJECT_ID=your-gcp-project-id
-GCP_SERVICE_ACCOUNT_KEY=your-gcp-service-account-key
-FIREBASE_API_KEY=your-firebase-api-key
-SUPABASE_URL=your-supabase-url
-SUPABASE_KEY=your-supabase-key
-CLOUDFLARE_API_KEY=your-cloudflare-api-key
+OPENAI_API_KEY=sk....
 ```
 
 6. **Run the App:**
@@ -105,89 +98,12 @@ CLOUDFLARE_API_KEY=your-cloudflare-api-key
 ## Menu
 
 The Agentic DevOps tool provides an interactive menu-based interface for navigating and selecting different features. Here is an outline of the CLI menu options:
-
-### Main Menu
-```plaintext
-📋 Main Menu
-1. 📄 Agentic DevOps
-2. 🚀 Agentic Deployment
-3. ❓ Help
-4. 🔥 Exit
-Enter your choice: 
-```
-
-### Agentic DevOps Menu
-```plaintext
-📋 Agentic DevOps Menu
-1.    Start Agentic DevOps WebUI
-2.    Create Dockerfile
-3.    Create Bash Script
-4.    Create Kubernetes Configuration
-5.    Create CI/CD Pipeline
-6.    Azure Configuration
-7.    AWS Configuration
-8.    GCP Configuration
-9.    Firebase Configuration
-10.   Developer Configuration
-11.   Settings
-12.   Back to Main Menu
-Enter your choice: 
-```
-
-### Agentic Deployment Menu
-```plaintext
-🚀 Agentic Deployment
-1. 📃 List Deployments
-2. 🛠️ Setup Deployment
-3. 🚀 Create Deployment
-4. 🔄 Update Deployment
-5. ❌ Remove Deployment
-6. 🔙 Return to Main Menu
-Enter your choice: 
-```
-
-## Usage
-
-To use the Agentic DevOps tool, follow these steps:
-
-1. **Run the Agentic DevOps tool:**
-   ```bash
-   agentic-devops
-   ```
-
-2. **Navigate through the menu options to select the desired feature.** For example, to create a Dockerfile, select "Create Dockerfile" from the menu.
-
-3. **Follow the prompts to provide necessary inputs and configurations.** For instance, you might be asked to specify the base image and packages to install for the Dockerfile.
-
-4. **Generated files or configurations will be saved in the specified output directory.** You can then use these files as needed in your projects.
-
-### Example: Creating a Dockerfile
-
-1. Run the tool:
-   ```bash
-   agentic-devops
-   ```
-
-2. Select "Create Dockerfile" from the menu.
-
-3. Follow the prompts to specify the base image and any additional packages or configurations.
-
-4. The generated Dockerfile will be saved in your project directory.
-
-### Example: Setting Up a CI/CD Pipeline
-
-1. Run the tool:
-   ```bash
-   agentic-devops
-   ```
-
-2. Select "Create CI/CD Pipeline" from the menu.
-
-3. Choose your CI/CD provider (e.g., GitHub Actions, GitLab CI, etc.).
-
-4. Define the stages for your pipeline (e.g., build, test, deploy).
-
-5. The generated CI/CD pipeline configuration file will be saved in your project directory.
+  ```
+        Main Menu:
+        1. Start WebUI 🌐
+        2. Settings ⚙️
+        3. Exit ❌
+  ```
 
 ### WebUI
 
@@ -244,9 +160,6 @@ Open a web browser and navigate to `http://localhost:8501`.
 ## Advanced Usage
 
 For advanced users, the Agentic DevOps tool offers additional features and customization options:
-
-### Custom Scripts
-Add custom scripts and configurations in the `./modules` directory. Ensure they follow the same structure and import necessary modules.
 
 ### Integration with CI/CD
 Integrate the tool with external CI/CD pipelines by including it in your build scripts and using its CLI commands.
