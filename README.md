@@ -17,10 +17,6 @@
 
 The Agentic DevOps tool is designed to streamline and automate various DevOps tasks and configurations. This versatile tool supports both a command-line interface (CLI) and a web-based user interface (WebUI), making it accessible for both terminal enthusiasts and those who prefer a graphical interface. 
 
-### Quick Install
-```
-pip install agentic-devops
-```
 
 ### What It Does
 

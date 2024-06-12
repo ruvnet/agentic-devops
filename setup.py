@@ -13,14 +13,22 @@ def read(fname):
 # Custom command to install aider_chat
 class CustomDevelopCommand(develop):
     def run(self):
-        subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'pip'])
-        subprocess.check_call([sys.executable, '-m', 'pip', 'install', './devops/aider_chat'])
+        # Ensure pip is installed
+        subprocess.check_call([sys.executable, '-m', 'ensurepip'])
+        # Navigate to the aider_chat directory and run pip install .
+        os.chdir('devops/aider_chat')
+        subprocess.check_call([sys.executable, '-m', 'pip', 'install', '.'])
+        os.chdir('../../')  # Change back to the root directory
         develop.run(self)
 
 class CustomInstallCommand(install):
     def run(self):
-        subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'pip'])
-        subprocess.check_call([sys.executable, '-m', 'pip', 'install', './devops/aider_chat'])
+        # Ensure pip is installed
+        subprocess.check_call([sys.executable, '-m', 'ensurepip'])
+        # Navigate to the aider_chat directory and run pip install .
+        os.chdir('devops/aider_chat')
+        subprocess.check_call([sys.executable, '-m', 'pip', 'install', '.'])
+        os.chdir('../../')  # Change back to the root directory
         install.run(self)
 
 # Load requirements from the main requirements.txt file
@@ -46,7 +54,7 @@ if os.path.isfile(aider_init_path):
 
 setup(
     name="agentic-devops",
-    version="0.0.3",
+    version="0.0.4",
     author="rUv",
     author_email="null@ruv.net",
     description="Agentic DevOps Tool for automating and managing various DevOps tasks and configurations.",
