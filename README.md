@@ -1,6 +1,3 @@
-Here is the updated `README.md` file for your `Agentic DevOps` tool:
-
-```markdown
 ```
         ___                    __  _         ____                            
        /   | ____ ____  ____  / /_(______   / __ \___ _   ______  ____  _____
@@ -127,7 +124,7 @@ Enter your choice:
 
 To use the Agentic DevOps tool, run the following command:
 ```bash
-python main.py
+agentic-devops
 ```
 Then, navigate through the menu options to select the desired feature. Follow the prompts to provide necessary inputs and configurations. Generated files or configurations will be saved in the specified output directory.
 
