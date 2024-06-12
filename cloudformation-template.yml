@@ -1,0 +1,24 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: AWS CloudFormation Template for my-stack
+
+Parameters:
+  EnvironmentType:
+    Description: Type of environment
+    Type: String
+    Default: dev
+    AllowedValues:
+      - dev
+      - test
+      - prod
+    ConstraintDescription: must be dev, test, or prod.
+
+Resources:
+  MyBucket:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      BucketName: !Sub 'my-stack-${EnvironmentType}-bucket'
+
+Outputs:
+  BucketName:
+    Description: Name of the S3 bucket
+    Value: !Ref MyBucket
