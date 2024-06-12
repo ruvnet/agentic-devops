@@ -1,10 +1,8 @@
 import configparser
-
 import os
 import re
 import sys
 from pathlib import Path
-import gradio as gr
 
 import git
 from dotenv import load_dotenv
@@ -235,21 +233,7 @@ def parse_lint_cmds(lint_cmds, io):
     return res
 
 
-def create_gradio_interface():
-    with gr.Blocks() as demo:
-        with gr.Tab("Home"):
-            gr.Markdown("## Welcome to the Home Tab")
-        with gr.Tab("Data Visualization"):
-            gr.Markdown("## Data Visualization Tab")
-        with gr.Tab("Model Interaction"):
-            gr.Markdown("## Model Interaction Tab")
-        with gr.Tab("Settings"):
-            gr.Markdown("## Settings Tab")
-    return demo
-
 def main(argv=None, input=None, output=None, force_git_root=None, return_coder=False):
-    demo = create_gradio_interface()
-    demo.launch()
     if argv is None:
         argv = sys.argv[1:]
 

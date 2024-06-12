@@ -131,11 +131,12 @@ class GUI:
             st.title("Agentic Devops")
             st.caption("Version 0.01rc")
 
-            # Add a dropdown menu for features
+            # Add a primary dropdown menu for features
             feature = st.selectbox(
                 "Select a Feature",
                 [
-                    "Select a Feature",
+                    "Select a Feature",  # Default option
+                    "Agentic Development",
                     "Create Dockerfile",
                     "Create Bash Script",
                     "Create Kubernetes Configuration",
@@ -144,63 +145,111 @@ class GUI:
                     "AWS Configuration",
                     "GCP Configuration",
                     "Firebase Configuration",
+                    "Supabase Configuration",
+                    "Cloudflare Configuration",
                     "Developer Configuration"
                 ]
             )
 
             additional_input = ""
-            if feature != "Select a Feature":
-                if feature == "Create Dockerfile":
-                    additional_input = st.text_area("Dockerfile Options", "Enter Dockerfile options")
-                    base_image = st.text_input("Base Image", "e.g., python:3.8-slim")
-                    maintainer = st.text_input("Maintainer", "e.g., Your Name <you@example.com>")
-                    packages = st.text_input("Packages to Install", "e.g., build-essential")
-                    commands = st.text_input("Commands to Run", "e.g., pip install -r requirements.txt")
-                    additional_input = f"{additional_input}, Base Image: {base_image}, Maintainer: {maintainer}, Packages: {packages}, Commands: {commands}"
-                elif feature == "Create Bash Script":
-                    additional_input = st.text_area("Bash Script Details", "Enter script details")
-                    script_name = st.text_input("Script Name", "e.g., deploy.sh")
-                    description = st.text_input("Description", "e.g., A script to deploy the application")
-                    additional_input = f"{additional_input}, Script Name: {script_name}, Description: {description}"
-                elif feature == "Create Kubernetes Configuration":
-                    additional_input = st.text_area("Kubernetes Config Details", "Enter config details")
-                    deployment_name = st.text_input("Deployment Name", "e.g., my-app")
-                    image = st.text_input("Container Image", "e.g., my-app:latest")
-                    replicas = st.number_input("Replicas", 1, 10, 1)
-                    additional_input = f"{additional_input}, Deployment Name: {deployment_name}, Image: {image}, Replicas: {replicas}"
-                elif feature == "Create CI/CD Pipeline":
-                    additional_input = st.text_area("CI/CD Pipeline Details", "Enter pipeline details")
-                    pipeline_name = st.text_input("Pipeline Name", "e.g., Build and Deploy")
-                    stages = st.text_input("Stages", "e.g., build, test, deploy")
-                    additional_input = f"{additional_input}, Pipeline Name: {pipeline_name}, Stages: {stages}"
-                elif feature == "Azure Configuration":
-                    additional_input = st.text_area("Azure Config Details", "Enter Azure config details")
-                    resource_group = st.text_input("Resource Group", "e.g., my-resource-group")
-                    location = st.text_input("Location", "e.g., eastus")
-                    additional_input = f"{additional_input}, Resource Group: {resource_group}, Location: {location}"
-                elif feature == "AWS Configuration":
-                    additional_input = st.text_area("AWS Config Details", "Enter AWS config details")
-                    stack_name = st.text_input("Stack Name", "e.g., my-stack")
-                    region = st.text_input("Region", "e.g., us-east-1")
-                    additional_input = f"{additional_input}, Stack Name: {stack_name}, Region: {region}"
-                elif feature == "GCP Configuration":
-                    additional_input = st.text_area("GCP Config Details", "Enter GCP config details")
-                    project_id = st.text_input("Project ID", "e.g., my-project-id")
-                    zone = st.text_input("Zone", "e.g., us-central1-a")
-                    additional_input = f"{additional_input}, Project ID: {project_id}, Zone: {zone}"
-                elif feature == "Firebase Configuration":
-                    additional_input = st.text_area("Firebase Config Details", "Enter Firebase config details")
-                    project_id = st.text_input("Project ID", "e.g., my-firebase-project")
-                    api_key = st.text_input("API Key", "e.g., my-api-key")
-                    additional_input = f"{additional_input}, Project ID: {project_id}, API Key: {api_key}"
-                elif feature == "Developer Configuration":
-                    additional_input = st.text_area("Developer Config Details", "Enter developer config details")
-                    nixpkgs_version = st.text_input("Nixpkgs Version", "e.g., 21.05")
-                    packages = st.text_input("Packages to Install", "e.g., vim, git")
-                    additional_input = f"{additional_input}, Nixpkgs Version: {nixpkgs_version}, Packages: {packages}"
+            service = ""
+            
+            # Add secondary dropdowns and inputs based on the primary selection
+            if feature == "Agentic Development":
+                app_name = st.text_input("Application Name", "MyApp")
+                app_description = st.text_area("Application Description", "Description of MyApp")
+                technologies = st.text_input("Technologies (comma separated)", "Python, React, Docker")
+                additional_input = f"App Name: {app_name}\nApp Description: {app_description}\nTechnologies: {technologies}"
+            elif feature == "Create Dockerfile":
+                base_image = st.text_input("Base Image", "python:3.8-slim")
+                packages = st.text_input("Packages to install (comma separated)", "numpy, pandas")
+                additional_input = f"Base Image: {base_image}\nPackages: {packages}"
+            elif feature == "Create Bash Script":
+                script_purpose = st.text_input("Script Purpose", "Deployment script")
+                commands = st.text_area("Commands to include", "echo Hello World")
+                additional_input = f"Script Purpose: {script_purpose}\nCommands: {commands}"
+            elif feature == "Create Kubernetes Configuration":
+                deployment_name = st.text_input("Deployment Name", "my-app-deployment")
+                container_image = st.text_input("Container Image", "my-app:latest")
+                cluster_name = st.text_input("Cluster Name", "my-cluster")
+                namespaces = st.text_input("Namespaces (comma separated)", "default, production")
+                additional_input = f"Deployment Name: {deployment_name}\nContainer Image: {container_image}\nCluster Name: {cluster_name}\nNamespaces: {namespaces}"
+            elif feature == "Create CI/CD Pipeline":
+                pipeline_name = st.text_input("Pipeline Name", "CI/CD Pipeline")
+                stages = st.text_area("Stages (comma separated)", "build, test, deploy")
+                additional_input = f"Pipeline Name: {pipeline_name}\nStages: {stages}"
+            elif feature == "Azure Configuration":
+                service = st.selectbox("Select Azure Service", ["Select Service", "Hosting", "Networking", "IAM", "Database"])
+                if service == "Hosting":
+                    resource_group = st.text_input("Resource Group", "my-resource-group")
+                    app_service_name = st.text_input("App Service Name", "my-app-service")
+                    region = st.text_input("Region", "East US")
+                    additional_input = f"Resource Group: {resource_group}\nApp Service Name: {app_service_name}\nRegion: {region}"
+                elif service == "Networking":
+                    resource_group = st.text_input("Resource Group", "my-resource-group")
+                    vnet_name = st.text_input("VNet Name", "my-vnet")
+                    subnet_name = st.text_input("Subnet Name", "my-subnet")
+                    additional_input = f"Resource Group: {resource_group}\nVNet Name: {vnet_name}\nSubnet Name: {subnet_name}"
+                # Add more services as needed
+            elif feature == "AWS Configuration":
+                service = st.selectbox("Select AWS Service", ["Select Service", "Hosting", "Networking", "IAM", "Database"])
+                if service == "Hosting":
+                    stack_name = st.text_input("Stack Name", "my-stack")
+                    ec2_instance_type = st.text_input("EC2 Instance Type", "t2.micro")
+                    region = st.text_input("Region", "us-east-1")
+                    additional_input = f"Stack Name: {stack_name}\nEC2 Instance Type: {ec2_instance_type}\nRegion: {region}"
+                elif service == "Networking":
+                    stack_name = st.text_input("Stack Name", "my-stack")
+                    vpc_id = st.text_input("VPC ID", "vpc-123456")
+                    subnet_id = st.text_input("Subnet ID", "subnet-123456")
+                    additional_input = f"Stack Name: {stack_name}\nVPC ID: {vpc_id}\nSubnet ID: {subnet_id}"
+                # Add more services as needed
+            elif feature == "GCP Configuration":
+                service = st.selectbox("Select GCP Service", ["Select Service", "Hosting", "Networking", "IAM", "Database"])
+                if service == "Hosting":
+                    project_id = st.text_input("Project ID", "my-gcp-project")
+                    instance_name = st.text_input("Instance Name", "my-instance")
+                    zone = st.text_input("Zone", "us-central1-a")
+                    additional_input = f"Project ID: {project_id}\nInstance Name: {instance_name}\nZone: {zone}"
+                elif service == "Networking":
+                    project_id = st.text_input("Project ID", "my-gcp-project")
+                    vpc_name = st.text_input("VPC Name", "my-vpc")
+                    subnet_name = st.text_input("Subnet Name", "my-subnet")
+                    additional_input = f"Project ID: {project_id}\nVPC Name: {vpc_name}\nSubnet Name: {subnet_name}"
+                # Add more services as needed
+            elif feature == "Firebase Configuration":
+                project_name = st.text_input("Project Name", "my-firebase-project")
+                features = st.text_area("Features to enable", "Authentication, Firestore")
+                additional_input = f"Project Name: {project_name}\nFeatures: {features}"
+            elif feature == "Supabase Configuration":
+                service = st.selectbox("Select Supabase Service", ["Select Service", "Hosting", "Authentication", "Storage", "Database"])
+                if service == "Hosting":
+                    project_name = st.text_input("Project Name", "my-supabase-project")
+                    region = st.text_input("Region", "us-west-1")
+                    additional_input = f"Project Name: {project_name}\nRegion: {region}"
+                elif service == "Authentication":
+                    project_name = st.text_input("Project Name", "my-supabase-project")
+                    auth_providers = st.text_input("Authentication Providers", "Email, Google")
+                    additional_input = f"Project Name: {project_name}\nAuthentication Providers: {auth_providers}"
+                # Add more services as needed
+            elif feature == "Cloudflare Configuration":
+                service = st.selectbox("Select Cloudflare Service", ["Select Service", "DNS", "Security", "Workers"])
+                if service == "DNS":
+                    project_name = st.text_input("Project Name", "my-cloudflare-project")
+                    dns_records = st.text_area("DNS Records", "A, CNAME, TXT")
+                    additional_input = f"Project Name: {project_name}\nDNS Records: {dns_records}"
+                elif service == "Security":
+                    project_name = st.text_input("Project Name", "my-cloudflare-project")
+                    security_features = st.text_area("Security Features", "WAF, DDoS Protection")
+                    additional_input = f"Project Name: {project_name}\nSecurity Features: {security_features}"
+                # Add more services as needed
+            elif feature == "Developer Configuration":
+                config_name = st.text_input("Configuration Name", "Dev Environment")
+                details = st.text_area("Configuration Details", "VS Code, Docker, Git")
+                additional_input = f"Configuration Name: {config_name}\nDetails: {details}"
 
-            if st.button("Start"):
-                self.start_feature(feature, additional_input)
+            if st.button("Start") and feature != "Select a Feature":
+                self.start_feature(feature, additional_input, service)
 
             self.do_add_to_chat()
             self.do_recent_msgs()
@@ -211,10 +260,13 @@ class GUI:
                 " issues](https://github.com/ruvnet/agentic-devops/issues)."
             )
 
-    def start_feature(self, feature, additional_input):
+    def start_feature(self, feature, additional_input, service):
         internal_guidance = ""
-        
-        if feature == "Create Dockerfile":
+
+        if feature == "Agentic Development":
+            internal_guidance = "Guide the development over several steps, including planning, design, implementation, and testing. Ensure to create complete and well-documented applications."
+            self.prompt = f"Agentic Development:\n{additional_input}\n{internal_guidance}"
+        elif feature == "Create Dockerfile":
             internal_guidance = "Ensure to include best practices for Dockerfile creation, such as minimizing layers, using a small base image, and cleaning up unnecessary files."
             self.prompt = f"Create a Dockerfile with options: {additional_input}. {internal_guidance}"
         elif feature == "Create Bash Script":
@@ -228,24 +280,35 @@ class GUI:
             self.prompt = f"Create a CI/CD pipeline for a Python project with details: {additional_input}. {internal_guidance}"
         elif feature == "Azure Configuration":
             internal_guidance = "Include detailed resource definitions, dependencies, and parameterized templates for flexibility."
-            self.prompt = f"Create an Azure Resource Manager template with details: {additional_input}. {internal_guidance}"
+            self.prompt = f"Create an Azure Resource Manager template for {service} with details: {additional_input}. {internal_guidance}"
         elif feature == "AWS Configuration":
             internal_guidance = "Ensure the template includes IAM roles and policies, and follows AWS best practices for security and scalability."
-            self.prompt = f"Create a CloudFormation template with details: {additional_input}. {internal_guidance}"
+            self.prompt = f"Create a CloudFormation template for {service} with details: {additional_input}. {internal_guidance}"
         elif feature == "GCP Configuration":
             internal_guidance = "Include configurations for IAM, networking, and resource management according to Google Cloud best practices."
-            self.prompt = f"Create a Google Cloud Deployment Manager template with details: {additional_input}. {internal_guidance}"
+            self.prompt = f"Create a Google Cloud Deployment Manager template for {service} with details: {additional_input}. {internal_guidance}"
         elif feature == "Firebase Configuration":
             internal_guidance = "Ensure the configuration includes authentication, database rules, and hosting settings."
             self.prompt = f"Create a Firebase configuration with details: {additional_input}. {internal_guidance}"
+        elif feature == "Supabase Configuration":
+            internal_guidance = "Ensure the configuration includes database settings, authentication, and storage settings."
+            self.prompt = f"Create a Supabase configuration for {service} with details: {additional_input}. {internal_guidance}"
+        elif feature == "Cloudflare Configuration":
+            internal_guidance = "Ensure the configuration includes DNS settings, security settings, and workers settings."
+            self.prompt = f"Create a Cloudflare configuration for {service} with details: {additional_input}. {internal_guidance}"
         elif feature == "Developer Configuration":
             internal_guidance = "Include common development tools and configurations, ensuring they follow best practices for development environments."
             self.prompt = f"Create a .nix configuration with details: {additional_input}. {internal_guidance}"
 
         if self.prompt:
+            # Save the output to the ./output folder
+            output_dir = "./output/"
+            os.makedirs(output_dir, exist_ok=True)
+            with open(os.path.join(output_dir, f"{feature.lower().replace(' ', '_')}.txt"), "w") as f:
+                f.write(self.prompt)
+
             self.state.prompt = self.prompt
             self.process_chat()
-
 
 
     def do_settings_tab(self):
