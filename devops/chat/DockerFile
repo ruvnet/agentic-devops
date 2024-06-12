@@ -1,0 +1,31 @@
+# Use the official Node.js 14 image as a parent image
+FROM node:20-alpine
+
+# Set the working directory
+WORKDIR /usr/src/app/chat
+
+# Copy both package.json and package-lock.json (or pnpm-lock.yaml)
+COPY package*.json pnpm-lock.yaml ./
+
+# Install any dependencies
+RUN npm install
+
+# Copy the rest of the application code
+COPY . .
+
+# Build the NextJS project
+RUN npm run build
+
+# Set environment variables for the application
+ARG DEEPGRAM_STT_DOMAIN
+ARG DEEPGRAM_API_KEY
+ARG OPENAI_API_KEY
+ARG EXASEARCH_API_KEY
+
+ENV DEEPGRAM_STT_DOMAIN=$DEEPGRAM_STT_DOMAIN
+ENV DEEPGRAM_API_KEY=$DEEPGRAM_API_KEY
+ENV OPENAI_API_KEY=$OPENAI_API_KEY
+ENV EXASEARCH_API_KEY=$EXASEARCH_API_KEY
+
+# Specify the command to run the NextJS app
+CMD ["npm", "start"]
