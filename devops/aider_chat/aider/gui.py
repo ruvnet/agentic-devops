@@ -153,13 +153,109 @@ class GUI:
 
             additional_input = ""
             service = ""
-            
+
             # Add secondary dropdowns and inputs based on the primary selection
             if feature == "Agentic Development":
-                app_name = st.text_input("Application Name", "MyApp")
-                app_description = st.text_area("Application Description", "Description of MyApp")
-                technologies = st.text_input("Technologies (comma separated)", "Python, React, Docker")
-                additional_input = f"App Name: {app_name}\nApp Description: {app_description}\nTechnologies: {technologies}"
+                approach = st.selectbox(
+                    "Select an Agentic Approach",
+                    [
+                        "Select an Approach",  # Default option
+                        "Microservices Architecture",
+                        "Serverless Architecture",
+                        "Monolithic Architecture",
+                        "Event-Driven Architecture",
+                        "API-First Development",
+                        "DevOps and Continuous Delivery",
+                        "Agile Development",
+                        "Test-Driven Development (TDD)",
+                        "Behavior-Driven Development (BDD)",
+                        "Domain-Driven Design (DDD)"
+                    ]
+                )
+
+                if approach == "Microservices Architecture":
+                    st.markdown("### Microservices Architecture")
+                    st.write("Develop software as a suite of small services, each running in its own process and communicating with lightweight mechanisms.")
+                    app_name = st.text_input("Application Name", "MyMicroserviceApp")
+                    app_description = st.text_area("Application Description", "Description of the microservice application")
+                    services = st.text_area("List of Services (comma separated)", "auth-service, user-service, payment-service")
+                    technologies = st.text_input("Technologies (comma separated)", "Docker, Kubernetes, Spring Boot")
+                    additional_input = f"App Name: {app_name}\nApp Description: {app_description}\nServices: {services}\nTechnologies: {technologies}"
+                elif approach == "Serverless Architecture":
+                    st.markdown("### Serverless Architecture")
+                    st.write("Develop software without managing the infrastructure, using cloud services to automatically handle scaling and server management.")
+                    app_name = st.text_input("Application Name", "MyServerlessApp")
+                    app_description = st.text_area("Application Description", "Description of the serverless application")
+                    functions = st.text_area("List of Functions (comma separated)", "login, register, processPayment")
+                    cloud_provider = st.selectbox("Cloud Provider", ["AWS Lambda", "Google Cloud Functions", "Azure Functions"])
+                    technologies = st.text_input("Technologies (comma separated)", "Node.js, Python, Go")
+                    additional_input = f"App Name: {app_name}\nApp Description: {app_description}\nFunctions: {functions}\nCloud Provider: {cloud_provider}\nTechnologies: {technologies}"
+                elif approach == "Monolithic Architecture":
+                    st.markdown("### Monolithic Architecture")
+                    st.write("Develop software as a single, unified application.")
+                    app_name = st.text_input("Application Name", "MyMonolithicApp")
+                    app_description = st.text_area("Application Description", "Description of the monolithic application")
+                    modules = st.text_area("List of Modules (comma separated)", "auth, user, payment")
+                    technologies = st.text_input("Technologies (comma separated)", "Java, Spring, Hibernate")
+                    additional_input = f"App Name: {app_name}\nApp Description: {app_description}\nModules: {modules}\nTechnologies: {technologies}"
+                elif approach == "Event-Driven Architecture":
+                    st.markdown("### Event-Driven Architecture")
+                    st.write("Develop software where events trigger actions or updates, promoting decoupling and flexibility.")
+                    app_name = st.text_input("Application Name", "MyEventDrivenApp")
+                    app_description = st.text_area("Application Description", "Description of the event-driven application")
+                    events = st.text_area("List of Events (comma separated)", "UserRegistered, OrderPlaced, PaymentProcessed")
+                    technologies = st.text_input("Technologies (comma separated)", "Kafka, RabbitMQ, AWS SNS")
+                    additional_input = f"App Name: {app_name}\nApp Description: {app_description}\nEvents: {events}\nTechnologies: {technologies}"
+                elif approach == "API-First Development":
+                    st.markdown("### API-First Development")
+                    st.write("Develop software by designing the API first, ensuring consistent and reusable interfaces.")
+                    app_name = st.text_input("Application Name", "MyAPIApp")
+                    app_description = st.text_area("Application Description", "Description of the API-first application")
+                    api_endpoints = st.text_area("List of API Endpoints (comma separated)", "/login, /register, /payments")
+                    technologies = st.text_input("Technologies (comma separated)", "OpenAPI, Swagger, REST, GraphQL")
+                    additional_input = f"App Name: {app_name}\nApp Description: {app_description}\nAPI Endpoints: {api_endpoints}\nTechnologies: {technologies}"
+                elif approach == "DevOps and Continuous Delivery":
+                    st.markdown("### DevOps and Continuous Delivery")
+                    st.write("Implement DevOps practices and continuous delivery pipelines for faster and more reliable software delivery.")
+                    app_name = st.text_input("Application Name", "MyDevOpsApp")
+                    app_description = st.text_area("Application Description", "Description of the DevOps application")
+                    ci_cd_tools = st.text_input("CI/CD Tools (comma separated)", "Jenkins, GitHub Actions, GitLab CI")
+                    monitoring_tools = st.text_input("Monitoring Tools (comma separated)", "Prometheus, Grafana, ELK Stack")
+                    additional_input = f"App Name: {app_name}\nApp Description: {app_description}\nCI/CD Tools: {ci_cd_tools}\nMonitoring Tools: {monitoring_tools}"
+                elif approach == "Agile Development":
+                    st.markdown("### Agile Development")
+                    st.write("Develop software using Agile methodologies for iterative development and flexibility.")
+                    app_name = st.text_input("Application Name", "MyAgileApp")
+                    app_description = st.text_area("Application Description", "Description of the Agile application")
+                    agile_framework = st.selectbox("Agile Framework", ["Scrum", "Kanban", "XP"])
+                    sprint_duration = st.text_input("Sprint Duration", "2 weeks")
+                    technologies = st.text_input("Technologies (comma separated)", "JIRA, Confluence, Trello")
+                    additional_input = f"App Name: {app_name}\nApp Description: {app_description}\nAgile Framework: {agile_framework}\nSprint Duration: {sprint_duration}\nTechnologies: {technologies}"
+                elif approach == "Test-Driven Development (TDD)":
+                    st.markdown("### Test-Driven Development (TDD)")
+                    st.write("Develop software by writing tests before implementing the functionality.")
+                    app_name = st.text_input("Application Name", "MyTDDApp")
+                    app_description = st.text_area("Application Description", "Description of the TDD application")
+                    test_frameworks = st.text_input("Test Frameworks (comma separated)", "JUnit, pytest, Mocha")
+                    technologies = st.text_input("Technologies (comma separated)", "Java, Python, JavaScript")
+                    additional_input = f"App Name: {app_name}\nApp Description: {app_description}\nTest Frameworks: {test_frameworks}\nTechnologies: {technologies}"
+                elif approach == "Behavior-Driven Development (BDD)":
+                    st.markdown("### Behavior-Driven Development (BDD)")
+                    st.write("Develop software by writing specifications in a readable format for all stakeholders.")
+                    app_name = st.text_input("Application Name", "MyBDDApp")
+                    app_description = st.text_area("Application Description", "Description of the BDD application")
+                    bdd_frameworks = st.text_input("BDD Frameworks (comma separated)", "Cucumber, SpecFlow, Behave")
+                    technologies = st.text_input("Technologies (comma separated)", "Java, C#, Python")
+                    additional_input = f"App Name: {app_name}\nApp Description: {app_description}\nBDD Frameworks: {bdd_frameworks}\nTechnologies: {technologies}"
+                elif approach == "Domain-Driven Design (DDD)":
+                    st.markdown("### Domain-Driven Design (DDD)")
+                    st.write("Develop software by focusing on the core domain and domain logic.")
+                    app_name = st.text_input("Application Name", "MyDDDApp")
+                    app_description = st.text_area("Application Description", "Description of the DDD application")
+                    bounded_contexts = st.text_area("Bounded Contexts (comma separated)", "Order, Payment, Inventory")
+                    technologies = st.text_input("Technologies (comma separated)", "Java, C#, .NET")
+                    additional_input = f"App Name: {app_name}\nApp Description: {app_description}\nBounded Contexts: {bounded_contexts}\nTechnologies: {technologies}"
+                
             elif feature == "Create Dockerfile":
                 base_image = st.text_input("Base Image", "python:3.8-slim")
                 packages = st.text_input("Packages to install (comma separated)", "numpy, pandas")
