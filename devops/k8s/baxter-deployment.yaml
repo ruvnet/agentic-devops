@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: default
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: production
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: baxter
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: baxter
+  template:
+    metadata:
+      labels:
+        app: baxter
+    spec:
+      containers:
+      - name: my-app
+        image: my-app:latest
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 20
