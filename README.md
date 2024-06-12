@@ -129,6 +129,7 @@ python main.py
 Then, navigate through the menu options to select the desired feature. Follow the prompts to provide necessary inputs and configurations. Generated files or configurations will be saved in the specified output directory.
 
 ## WebUI
+![Agentic Engineering](./assets/1.png)
 
 The Agentic DevOps tool also provides a web-based user interface (WebUI) for a more intuitive and visual experience. The WebUI uses the same menu structure as the CLI, making it easy to switch between the two interfaces.
 
