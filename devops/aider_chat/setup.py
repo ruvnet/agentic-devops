@@ -5,6 +5,7 @@ from setuptools import find_packages, setup
 with open("requirements.txt") as f:
     requirements = f.read().splitlines()
 
+# Ensure that __version__ is defined in the aider package
 from aider import __version__
 
 with open("README.md", "r", encoding="utf-8") as f:

@@ -53,6 +53,27 @@ intents = {
 def cli():
     pass
 
+def main():
+    click.echo("🔍 Checking for installed packages and requirements...")
+    check_installation()
+    click.echo("🔍 Checking for required CLI tools...")
+    check_cli_tools()
+    click.echo("🔍 Validating Azure keys...")
+    validate_azure_keys()
+
+    click.echo(r"""
+        ___                    __  _         ____                            
+       /   | ____ ____  ____  / /_(______   / __ \___ _   ______  ____  _____
+      / /| |/ __ `/ _ \/ __ \/ __/ / ___/  / / / / _ | | / / __ \/ __ \/ ___/
+     / ___ / /_/ /  __/ / / / /_/ / /__   / /_/ /  __| |/ / /_/ / /_/ (__  ) 
+    /_/  |_\__, /\___/_/ /_/\__/_/\___/  /_____/\___/|___/\____/ .___/____/  
+          /____/                                              /_/            
+
+    Welcome to Wizard of DevOps! Let's get started with your DevOps tasks.
+    """)
+    main_menu()
+
+
 @cli.command()
 def welcome():
     click.echo(r"""

@@ -1,3 +1,6 @@
+Here is the updated `README.md` file for your `Agentic DevOps` tool:
+
+```markdown
 ```
         ___                    __  _         ____                            
        /   | ____ ____  ____  / /_(______   / __ \___ _   ______  ____  _____
@@ -53,7 +56,7 @@ To install the Agentic DevOps tool, follow these steps:
 
 3. Install the required dependencies:
    ```bash
-   pip install -r requirements.txt
+   pip install -e .
    ```
 
 4. Set up the necessary environment variables (see the "Environment Secrets" section below).
@@ -173,4 +176,3 @@ Contributions to the Agentic DevOps tool are welcome! If you find any issues or 
 ## License
 
 The Agentic DevOps tool is open-source software licensed under the [MIT License](https://github.com/ruvnet/agentic-devops/blob/main/LICENSE).
- 
