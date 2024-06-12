@@ -9,7 +9,91 @@
     Welcome to Wizard of DevOps! Let's get started with your DevOps tasks.
 ```
 
-# Agentic DevOps 
+# MyEventDrivenApp
+
+## Description
+
+Description of the event-driven application
+
+## Events
+
+- UserRegistered
+- OrderPlaced
+- PaymentProcessed
+
+## Technologies
+
+- Kafka
+- RabbitMQ
+- AWS SNS
+
+## Initial Setup
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/yourusername/MyEventDrivenApp.git
+   ```
+
+2. **Navigate to the project directory:**
+   ```bash
+   cd MyEventDrivenApp
+   ```
+
+3. **Create and activate a virtual environment (optional but recommended):**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+   ```
+
+4. **Install the required dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+5. **Set up the necessary environment variables (see the "Environment Secrets" section below).**
+
+## Environment Secrets
+
+The application requires certain environment variables to be set for authentication and configuration purposes. Make sure to set the following environment variables:
+
+- `KAFKA_BOOTSTRAP_SERVERS`: Your Kafka bootstrap servers.
+- `RABBITMQ_URL`: Your RabbitMQ URL.
+- `AWS_ACCESS_KEY_ID`: Your AWS access key ID.
+- `AWS_SECRET_ACCESS_KEY`: Your AWS secret access key.
+- `AWS_REGION`: Your AWS region.
+
+You can set these environment variables either in your system environment or by creating a `.env` file in the project root directory. Here is an example of a `.env` file:
+
+```plaintext
+KAFKA_BOOTSTRAP_SERVERS=your-kafka-bootstrap-servers
+RABBITMQ_URL=your-rabbitmq-url
+AWS_ACCESS_KEY_ID=your-aws-access-key-id
+AWS_SECRET_ACCESS_KEY=your-aws-secret-access-key
+AWS_REGION=your-aws-region
+```
+
+6. **Run the App:**
+   ```bash
+   python src/main.py
+   ```
+
+## Development Steps
+
+### Step 1: Planning
+
+Define the structure and components of the application.
+
+### Step 2: Design
+
+Create the necessary configurations and initial setup for Kafka, RabbitMQ, and AWS SNS.
+
+### Step 3: Implementation
+
+Develop the event producers and consumers.
+
+### Step 4: Testing
+
+Write tests to ensure the event-driven system works as expected.
 
 ![Agentic Engineering](./assets/2.png)
 
