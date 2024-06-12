@@ -72,6 +72,9 @@ To install the Agentic DevOps tool, follow these steps:
 
 The Agentic DevOps tool requires certain environment variables to be set for authentication and configuration purposes. Make sure to set the following environment variables:
 
+- `OPENAI_API_KEY` : You OpenAi Key
+
+## Optional Keys
 - `AZURE_CLIENT_ID`: Your Azure client ID.
 - `AZURE_CLIENT_SECRET`: Your Azure client secret.
 - `AZURE_APP_CONFIG_CON_STR`: Your Azure App Configuration connection string.
