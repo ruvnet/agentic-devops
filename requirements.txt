@@ -4,6 +4,7 @@ azure-mgmt-web==3.0.0
 azure-appconfiguration==1.1.1
 pytest==7.1.1
 litellm
+gh
 # Requirements for the backend FastAPI application
 fastapi
 uvicorn
