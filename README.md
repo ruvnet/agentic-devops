@@ -41,22 +41,28 @@ Agentic Engineering is a modern approach to software development that integrates
 
 To install the Agentic DevOps tool, follow these steps:
 
-1. Clone the repository:
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/ruvnet/agentic-devops.git
    ```
 
-2. Navigate to the project directory:
+2. **Navigate to the project directory:**
    ```bash
    cd agentic-devops
    ```
 
-3. Install the required dependencies:
+3. **Create and activate a virtual environment (optional but recommended):**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+   ```
+
+4. **Install the required dependencies:**
    ```bash
    pip install -e .
    ```
 
-4. Set up the necessary environment variables (see the "Environment Secrets" section below).
+5. **Set up the necessary environment variables (see the "Environment Secrets" section below).**
 
 ## Environment Secrets
 
@@ -74,9 +80,23 @@ The Agentic DevOps tool requires certain environment variables to be set for aut
 - `SUPABASE_KEY`: Your Supabase project API key.
 - `CLOUDFLARE_API_KEY`: Your Cloudflare API key.
 
-You can set these environment variables either in your system environment or by creating a `.env` file in the project root directory.
+You can set these environment variables either in your system environment or by creating a `.env` file in the project root directory. Here is an example of a `.env` file:
 
-5. Run the App
+```plaintext
+AZURE_CLIENT_ID=your-azure-client-id
+AZURE_CLIENT_SECRET=your-azure-client-secret
+AZURE_APP_CONFIG_CON_STR=your-azure-app-config-connection-string
+AWS_ACCESS_KEY_ID=your-aws-access-key-id
+AWS_SECRET_ACCESS_KEY=your-aws-secret-access-key
+GCP_PROJECT_ID=your-gcp-project-id
+GCP_SERVICE_ACCOUNT_KEY=your-gcp-service-account-key
+FIREBASE_API_KEY=your-firebase-api-key
+SUPABASE_URL=your-supabase-url
+SUPABASE_KEY=your-supabase-key
+CLOUDFLARE_API_KEY=your-cloudflare-api-key
+```
+
+6. **Run the App:**
    ```bash
    agentic-devops
    ```
@@ -127,11 +147,73 @@ Enter your choice:
 
 ## Usage
 
-To use the Agentic DevOps tool, run the following command:
-```bash
-agentic-devops
-```
-Then, navigate through the menu options to select the desired feature. Follow the prompts to provide necessary inputs and configurations. Generated files or configurations will be saved in the specified output directory.
+To use the Agentic DevOps tool, follow these steps:
+
+1. **Run the Agentic DevOps tool:**
+   ```bash
+   agentic-devops
+   ```
+
+2. **Navigate through the menu options to select the desired feature.** For example, to create a Dockerfile, select "Create Dockerfile" from the menu.
+
+3. **Follow the prompts to provide necessary inputs and configurations.** For instance, you might be asked to specify the base image and packages to install for the Dockerfile.
+
+4. **Generated files or configurations will be saved in the specified output directory.** You can then use these files as needed in your projects.
+
+### Example: Creating a Dockerfile
+
+1. Run the tool:
+   ```bash
+   agentic-devops
+   ```
+
+2. Select "Create Dockerfile" from the menu.
+
+3. Follow the prompts to specify the base image and any additional packages or configurations.
+
+4. The generated Dockerfile will be saved in your project directory.
+
+### Example: Setting Up a CI/CD Pipeline
+
+1. Run the tool:
+   ```bash
+   agentic-devops
+   ```
+
+2. Select "Create CI/CD Pipeline" from the menu.
+
+3. Choose your CI/CD provider (e.g., GitHub Actions, GitLab CI, etc.).
+
+4. Define the stages for your pipeline (e.g., build, test, deploy).
+
+5. The generated CI/CD pipeline configuration file will be saved in your project directory.
+
+### WebUI
+
+The Agentic DevOps tool also provides a web-based user interface (WebUI) for a more intuitive and visual experience. The WebUI uses the same menu structure as the CLI, making it easy to switch between the two interfaces.
+
+#### Start the WebUI
+
+To start the WebUI, select "Start Agentic DevOps WebUI" from the Agentic DevOps menu.
+
+#### Access the WebUI
+
+Open a web browser and navigate to `http://localhost:8501`.
+
+#### WebUI Options
+
+- **Agentic Development**: Choose from different development approaches like microservices, serverless, monolithic, event-driven, API-first, and more.
+- **Create Dockerfile**: Input base image, packages to install, and generate a Dockerfile.
+- **Create Bash Script**: Define the script purpose and include necessary commands.
+- **Create Kubernetes Configuration**: Provide deployment name, container image, cluster name, and namespaces.
+- **Create CI/CD Pipeline**: Select a CI/CD provider and define stages for the pipeline.
+- **Azure Configuration**: Configure Azure services such as hosting, networking, IAM, database, storage, DevOps, AI & ML, monitoring, and security.
+- **AWS Configuration**: Configure AWS services like hosting, networking, IAM, and database.
+- **GCP Configuration**: Configure GCP services including hosting, networking, IAM, and database.
+- **Firebase Configuration**: Enable Firebase features for your project.
+- **Supabase Configuration**: Configure Supabase services such as hosting, authentication, storage, and database.
+- **Cloudflare Configuration**: Set up Cloudflare services for DNS, security, and workers.
+- **Developer Configuration**: Set up development environments for languages like Python, Node.js, Java, Rust, Go, C#, Ruby, PHP, and C++.
 
 ## WebUI
 ![Agentic Engineering](./assets/1.png)
