@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import os
 import random
 import sys
@@ -11,7 +9,6 @@ from aider.dump import dump  # noqa: F401
 from aider.io import InputOutput
 from aider.main import main as cli_main
 from aider.scrape import Scraper
-
 
 class CaptureIO(InputOutput):
     lines = []
@@ -27,7 +24,6 @@ class CaptureIO(InputOutput):
         self.lines = []
         return lines
 
-
 def search(text=None):
     results = []
     for root, _, files in os.walk("aider"):
@@ -35,12 +31,8 @@ def search(text=None):
             path = os.path.join(root, file)
             if not text or text in path:
                 results.append(path)
-    # dump(results)
-
     return results
 
-
-# Keep state as a resource, which survives browser reloads (since Coder does too)
 class State:
     keys = set()
 
@@ -52,11 +44,9 @@ class State:
         setattr(self, key, val)
         return True
 
-
 @st.cache_resource
 def get_state():
     return State()
-
 
 @st.cache_resource
 def get_coder():
@@ -72,11 +62,9 @@ def get_coder():
         dry_run=coder.io.dry_run,
         encoding=coder.io.encoding,
     )
-    # coder.io = io # this breaks the input_history
     coder.commands.io = io
 
     return coder
-
 
 class GUI:
     prompt = None
@@ -140,20 +128,125 @@ class GUI:
 
     def do_sidebar(self):
         with st.sidebar:
-            st.title("Agentic Devops") # sidebar title
-            # self.cmds_tab, self.settings_tab = st.tabs(["Commands", "Settings"])
+            st.title("Agentic Devops")
+            st.caption("Version 0.01rc")
 
-            # self.do_recommended_actions()
+            # Add a dropdown menu for features
+            feature = st.selectbox(
+                "Select a Feature",
+                [
+                    "Select a Feature",
+                    "Create Dockerfile",
+                    "Create Bash Script",
+                    "Create Kubernetes Configuration",
+                    "Create CI/CD Pipeline",
+                    "Azure Configuration",
+                    "AWS Configuration",
+                    "GCP Configuration",
+                    "Firebase Configuration",
+                    "Developer Configuration"
+                ]
+            )
+
+            additional_input = ""
+            if feature != "Select a Feature":
+                if feature == "Create Dockerfile":
+                    additional_input = st.text_area("Dockerfile Options", "Enter Dockerfile options")
+                    base_image = st.text_input("Base Image", "e.g., python:3.8-slim")
+                    maintainer = st.text_input("Maintainer", "e.g., Your Name <you@example.com>")
+                    packages = st.text_input("Packages to Install", "e.g., build-essential")
+                    commands = st.text_input("Commands to Run", "e.g., pip install -r requirements.txt")
+                    additional_input = f"{additional_input}, Base Image: {base_image}, Maintainer: {maintainer}, Packages: {packages}, Commands: {commands}"
+                elif feature == "Create Bash Script":
+                    additional_input = st.text_area("Bash Script Details", "Enter script details")
+                    script_name = st.text_input("Script Name", "e.g., deploy.sh")
+                    description = st.text_input("Description", "e.g., A script to deploy the application")
+                    additional_input = f"{additional_input}, Script Name: {script_name}, Description: {description}"
+                elif feature == "Create Kubernetes Configuration":
+                    additional_input = st.text_area("Kubernetes Config Details", "Enter config details")
+                    deployment_name = st.text_input("Deployment Name", "e.g., my-app")
+                    image = st.text_input("Container Image", "e.g., my-app:latest")
+                    replicas = st.number_input("Replicas", 1, 10, 1)
+                    additional_input = f"{additional_input}, Deployment Name: {deployment_name}, Image: {image}, Replicas: {replicas}"
+                elif feature == "Create CI/CD Pipeline":
+                    additional_input = st.text_area("CI/CD Pipeline Details", "Enter pipeline details")
+                    pipeline_name = st.text_input("Pipeline Name", "e.g., Build and Deploy")
+                    stages = st.text_input("Stages", "e.g., build, test, deploy")
+                    additional_input = f"{additional_input}, Pipeline Name: {pipeline_name}, Stages: {stages}"
+                elif feature == "Azure Configuration":
+                    additional_input = st.text_area("Azure Config Details", "Enter Azure config details")
+                    resource_group = st.text_input("Resource Group", "e.g., my-resource-group")
+                    location = st.text_input("Location", "e.g., eastus")
+                    additional_input = f"{additional_input}, Resource Group: {resource_group}, Location: {location}"
+                elif feature == "AWS Configuration":
+                    additional_input = st.text_area("AWS Config Details", "Enter AWS config details")
+                    stack_name = st.text_input("Stack Name", "e.g., my-stack")
+                    region = st.text_input("Region", "e.g., us-east-1")
+                    additional_input = f"{additional_input}, Stack Name: {stack_name}, Region: {region}"
+                elif feature == "GCP Configuration":
+                    additional_input = st.text_area("GCP Config Details", "Enter GCP config details")
+                    project_id = st.text_input("Project ID", "e.g., my-project-id")
+                    zone = st.text_input("Zone", "e.g., us-central1-a")
+                    additional_input = f"{additional_input}, Project ID: {project_id}, Zone: {zone}"
+                elif feature == "Firebase Configuration":
+                    additional_input = st.text_area("Firebase Config Details", "Enter Firebase config details")
+                    project_id = st.text_input("Project ID", "e.g., my-firebase-project")
+                    api_key = st.text_input("API Key", "e.g., my-api-key")
+                    additional_input = f"{additional_input}, Project ID: {project_id}, API Key: {api_key}"
+                elif feature == "Developer Configuration":
+                    additional_input = st.text_area("Developer Config Details", "Enter developer config details")
+                    nixpkgs_version = st.text_input("Nixpkgs Version", "e.g., 21.05")
+                    packages = st.text_input("Packages to Install", "e.g., vim, git")
+                    additional_input = f"{additional_input}, Nixpkgs Version: {nixpkgs_version}, Packages: {packages}"
+
+            if st.button("Start"):
+                self.start_feature(feature, additional_input)
+
             self.do_add_to_chat()
             self.do_recent_msgs()
             self.do_clear_chat_history()
-            # st.container(height=150, border=False)
-            # st.write("### Experimental")
 
             st.warning(
-                "This browser version of aider is experimental. Please share feedback in [GitHub"
-                " issues](https://github.com/paul-gauthier/aider/issues)."
+                "This browser version of Agentic Devops is experimental. Please share feedback in [GitHub"
+                " issues](https://github.com/ruvnet/agentic-devops/issues)."
             )
+
+    def start_feature(self, feature, additional_input):
+        internal_guidance = ""
+        
+        if feature == "Create Dockerfile":
+            internal_guidance = "Ensure to include best practices for Dockerfile creation, such as minimizing layers, using a small base image, and cleaning up unnecessary files."
+            self.prompt = f"Create a Dockerfile with options: {additional_input}. {internal_guidance}"
+        elif feature == "Create Bash Script":
+            internal_guidance = "The script should handle errors gracefully, use descriptive comments, and include execution permissions."
+            self.prompt = f"Create a basic deployment script with details: {additional_input}. {internal_guidance}"
+        elif feature == "Create Kubernetes Configuration":
+            internal_guidance = "Ensure the configuration includes resource limits, readiness and liveness probes, and follows Kubernetes best practices."
+            self.prompt = f"Create a Kubernetes config for a web application with details: {additional_input}. {internal_guidance}"
+        elif feature == "Create CI/CD Pipeline":
+            internal_guidance = "The pipeline should include stages for building, testing, and deploying the application, and should support rollback mechanisms."
+            self.prompt = f"Create a CI/CD pipeline for a Python project with details: {additional_input}. {internal_guidance}"
+        elif feature == "Azure Configuration":
+            internal_guidance = "Include detailed resource definitions, dependencies, and parameterized templates for flexibility."
+            self.prompt = f"Create an Azure Resource Manager template with details: {additional_input}. {internal_guidance}"
+        elif feature == "AWS Configuration":
+            internal_guidance = "Ensure the template includes IAM roles and policies, and follows AWS best practices for security and scalability."
+            self.prompt = f"Create a CloudFormation template with details: {additional_input}. {internal_guidance}"
+        elif feature == "GCP Configuration":
+            internal_guidance = "Include configurations for IAM, networking, and resource management according to Google Cloud best practices."
+            self.prompt = f"Create a Google Cloud Deployment Manager template with details: {additional_input}. {internal_guidance}"
+        elif feature == "Firebase Configuration":
+            internal_guidance = "Ensure the configuration includes authentication, database rules, and hosting settings."
+            self.prompt = f"Create a Firebase configuration with details: {additional_input}. {internal_guidance}"
+        elif feature == "Developer Configuration":
+            internal_guidance = "Include common development tools and configurations, ensuring they follow best practices for development environments."
+            self.prompt = f"Create a .nix configuration with details: {additional_input}. {internal_guidance}"
+
+        if self.prompt:
+            self.state.prompt = self.prompt
+            self.process_chat()
+
+
 
     def do_settings_tab(self):
         pass
@@ -172,7 +265,6 @@ class GUI:
                 self.button("Add `.aider*` to `.gitignore`", key=random.random(), help="?")
 
     def do_add_to_chat(self):
-        # with st.expander("Add to the chat", expanded=True):
         self.do_add_files()
         self.do_add_web_page()
 
@@ -253,8 +345,6 @@ class GUI:
 
     def do_git(self):
         with st.expander("Git", expanded=False):
-            # st.button("Show last diff")
-            # st.button("Undo last commit")
             self.button("Commit any pending changes")
             with st.popover("Run git command"):
                 st.markdown("## Run git command")
@@ -282,7 +372,6 @@ class GUI:
                 "Resend a recent chat message",
                 self.state.input_history,
                 placeholder="Choose a recent chat message",
-                # label_visibility="collapsed",
                 index=None,
                 key=f"recent_msgs_{self.state.recent_msgs_num}",
                 disabled=self.prompt_pending(),
@@ -292,10 +381,6 @@ class GUI:
 
     def do_messages_container(self):
         self.messages = st.container()
-
-        # stuff a bunch of vertical whitespace at the top
-        # to get all the chat text to the bottom
-        # self.messages.container(height=300, border=False)
 
         with self.messages:
             for msg in self.state.messages:
@@ -313,7 +398,6 @@ class GUI:
                 elif role in ("user", "assistant"):
                     with st.chat_message(role):
                         st.write(msg["content"])
-                        # self.cost()
                 else:
                     st.dict(msg)
 
@@ -342,18 +426,14 @@ class GUI:
 
     def button(self, args, **kwargs):
         "Create a button, disabled if prompt pending"
-
-        # Force everything to be disabled if there is a prompt pending
         if self.prompt_pending():
             kwargs["disabled"] = True
-
         return st.button(args, **kwargs)
 
     def __init__(self):
         self.coder = get_coder()
         self.state = get_state()
 
-        # Force the coder to cooperate, regardless of cmd line args
         self.coder.yield_stream = True
         self.coder.stream = True
         self.coder.pretty = False
@@ -391,7 +471,6 @@ class GUI:
             with self.messages.expander(line):
                 st.text(self.prompt)
 
-        # re-render the UI for the prompt_pending state
         st.rerun()
 
     def prompt_pending(self):
@@ -409,7 +488,6 @@ class GUI:
             with self.messages.chat_message("assistant"):
                 res = st.write_stream(self.coder.run_stream(prompt))
                 self.state.messages.append({"role": "assistant", "content": res})
-                # self.cost()
             if self.coder.reflected_message:
                 self.info(self.coder.reflected_message)
             prompt = self.coder.reflected_message
@@ -434,14 +512,11 @@ class GUI:
             self.state.messages.append(edit)
             self.show_edit_info(edit)
 
-        # re-render the UI for the non-prompt_pending state
         st.rerun()
 
     def info(self, message, echo=True):
         info = dict(role="info", content=message)
         self.state.messages.append(info)
-
-        # We will render the tail of the messages array after this call
         if echo:
             self.messages.info(message)
 
@@ -508,7 +583,6 @@ class GUI:
             self.prompt_as = None
             self.prompt = reply
 
-
 def gui_main():
     st.set_page_config(
         layout="wide",
@@ -521,12 +595,7 @@ def gui_main():
         },
     )
 
-    # config_options = st.config._config_options
-    # for key, value in config_options.items():
-    #    print(f"{key}: {value.value}")
-
     GUI()
-
 
 if __name__ == "__main__":
     status = gui_main()

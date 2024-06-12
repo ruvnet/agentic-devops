@@ -1,3 +1,4 @@
+# modules/bash.py is a new file that contains the create_bash_script function. This function is called when the user selects the "Create Bash Script" option from the coder_menu function in coder.py. The create_bash_script function prompts the user to provide instructions for creating a Bash script and optional guidance for the AI. It then creates a Bash script file based on the user's input.
 import click
 import os
 from modules.utils import run_aider_command

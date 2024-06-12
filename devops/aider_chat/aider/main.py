@@ -1,4 +1,5 @@
 import configparser
+
 import os
 import re
 import sys
@@ -140,12 +141,31 @@ def scrub_sensitive_info(args, text):
         text = text.replace(args.anthropic_api_key, "***")
     return text
 
-
 def launch_gui(args):
     from aider import gui
+    import psutil
+    import socket
+
+    def kill_process_using_port(port):
+        for proc in psutil.process_iter(['pid', 'name']):
+            try:
+                for conn in proc.connections(kind='inet'):
+                    if conn.laddr.port == port:
+                        proc.kill()
+                        print(f"✅ Killed process {proc.name()} (PID: {proc.pid}) using port {port}")
+            except (psutil.AccessDenied, psutil.NoSuchProcess):
+                continue
+
+    def get_local_ip():
+        hostname = socket.gethostname()
+        local_ip = socket.gethostbyname(hostname)
+        return local_ip
 
     print()
     print("CONTROL-C to exit...")
+
+    port = getattr(args, 'gui_port', 8501)
+    kill_process_using_port(port)
 
     target = gui.__file__
 
@@ -155,6 +175,7 @@ def launch_gui(args):
         "--browser.gatherUsageStats=false",
         "--runner.magicEnabled=false",
         "--server.runOnSave=false",
+        "--server.address=0.0.0.0",  # Bind to all network interfaces
     ]
 
     if "-dev" in __version__:
@@ -166,7 +187,15 @@ def launch_gui(args):
             "--client.toolbarMode=viewer",  # minimal?
         ]
 
+    # Add the new command line argument for specifying the GUI port
+    st_args += ["--server.port", str(port)]
+
     st_args += ["--"] + args
+
+    local_ip = get_local_ip()
+
+    print(f"🛜 Started Agentic Devops on http://localhost:{port}")
+    # print(f"Started Agentic Devops on http://{local_ip}:{port}")
 
     cli.main(st_args)
 
