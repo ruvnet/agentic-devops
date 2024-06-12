@@ -11,11 +11,16 @@
 
 # Agentic DevOps 
 
-![Agentic Engineering](./assets/2.png)
+![Agentic Engineering](https://github.com/ruvnet/agentic-devops/blob/main/assets/2.png)
 
 ## Introduction
 
 The Agentic DevOps tool is designed to streamline and automate various DevOps tasks and configurations. This versatile tool supports both a command-line interface (CLI) and a web-based user interface (WebUI), making it accessible for both terminal enthusiasts and those who prefer a graphical interface. 
+
+### Quick Install
+```
+pip install agentic-devops
+```
 
 ### What It Does
 
@@ -216,7 +221,7 @@ Open a web browser and navigate to `http://localhost:8501`.
 - **Developer Configuration**: Set up development environments for languages like Python, Node.js, Java, Rust, Go, C#, Ruby, PHP, and C++.
 
 ## WebUI
-![Agentic Engineering](./assets/1.png)
+![Agentic Engineering](https://github.com/ruvnet/agentic-devops/blob/main/assets/1.png?raw=true)
 
 The Agentic DevOps tool also provides a web-based user interface (WebUI) for a more intuitive and visual experience. The WebUI uses the same menu structure as the CLI, making it easy to switch between the two interfaces.
 

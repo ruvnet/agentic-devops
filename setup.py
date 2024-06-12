@@ -1,18 +1,41 @@
 import os
 import re
+import sys
+import subprocess
 from setuptools import setup, find_packages
+from setuptools.command.develop import develop
+from setuptools.command.install import install
 
 # Helper function to read files
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
-# Load requirements from the requirements.txt file
+# Custom command to install aider_chat
+class CustomDevelopCommand(develop):
+    def run(self):
+        subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'pip'])
+        subprocess.check_call([sys.executable, '-m', 'pip', 'install', './devops/aider_chat'])
+        develop.run(self)
+
+class CustomInstallCommand(install):
+    def run(self):
+        subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'pip'])
+        subprocess.check_call([sys.executable, '-m', 'pip', 'install', './devops/aider_chat'])
+        install.run(self)
+
+# Load requirements from the main requirements.txt file
 with open('requirements.txt') as f:
     requirements = f.read().splitlines()
 
+# Load requirements from the aider_chat requirements.txt file
+aider_chat_requirements_path = os.path.join('devops', 'aider_chat', 'requirements.txt')
+if os.path.isfile(aider_chat_requirements_path):
+    with open(aider_chat_requirements_path) as f:
+        requirements += f.read().splitlines()
+
 # Ensure that the aider package is included and version is imported correctly
 aider_version = "0.1.0"
-aider_init_path = os.path.join(os.path.dirname(__file__), 'devops', 'aider_chat', 'aider', '__init__.py')
+aider_init_path = os.path.join('devops', 'aider_chat', 'aider', '__init__.py')
 if os.path.isfile(aider_init_path):
     with open(aider_init_path) as f:
         for line in f:
@@ -23,9 +46,9 @@ if os.path.isfile(aider_init_path):
 
 setup(
     name="agentic-devops",
-    version="0.1.0",
-    author="Reuven Cohen",
-    author_email="your-email@example.com",
+    version="0.0.3",
+    author="rUv",
+    author_email="null@ruv.net",
     description="Agentic DevOps Tool for automating and managing various DevOps tasks and configurations.",
     long_description=read('README.md'),
     long_description_content_type='text/markdown',
@@ -45,7 +68,8 @@ setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.6',
+    cmdclass={
+        'develop': CustomDevelopCommand,
+        'install': CustomInstallCommand,
+    },
 )
-
-# Ensure that the aider_chat package is installed
-os.system(f'pip install devops/aider_chat')
