@@ -1,6 +1,0 @@
-Agentic Development:
-App Name: MyEventDrivenApp
-App Description: Description of the event-driven application
-Events: UserRegistered, OrderPlaced, PaymentProcessed
-Technologies: Kafka, RabbitMQ, AWS SNS
-Guide the development over several steps, including planning, design, implementation, and testing. Ensure to create complete and well-documented applications.

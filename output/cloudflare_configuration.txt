@@ -1,2 +1,0 @@
-Create a Cloudflare configuration for DNS with details: Project Name: my-cloudflare-project
-DNS Records: A, CNAME, TXT. Ensure the configuration includes DNS settings, security settings, and workers settings.

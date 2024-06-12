@@ -1,1 +1,0 @@
-Create an Azure Resource Manager template for Select Service with details: . Include detailed resource definitions, dependencies, and parameterized templates for flexibility.

@@ -256,7 +256,7 @@ class GUI:
                     bounded_contexts = st.text_area("Bounded Contexts (comma separated)", "Order, Payment, Inventory")
                     technologies = st.text_input("Technologies (comma separated)", "Java, C#, .NET")
                     additional_input = f"App Name: {app_name}\nApp Description: {app_description}\nBounded Contexts: {bounded_contexts}\nTechnologies: {technologies}"
-                
+
             elif feature == "Create Dockerfile":
                 base_image = st.text_input("Base Image", "python:3.8-slim")
                 packages = st.text_input("Packages to install (comma separated)", "numpy, pandas")
@@ -343,7 +343,7 @@ class GUI:
                     pipeline_name = st.text_input("Pipeline Name", "Bitbucket Pipelines")
                     stages = st.text_area("Stages (comma separated)", "build, test, deploy")
                     additional_input = f"Pipeline Name: {pipeline_name}\nProvider: Bitbucket Pipelines\nStages: {stages}"
- 
+
             elif feature == "Azure Configuration":
                 service = st.selectbox(
                     "Select Azure Service",
@@ -441,22 +441,105 @@ class GUI:
                     resource_group = st.text_input("Resource Group", "my-resource-group")
                     security_center_policy = st.text_area("Security Center Policy", "Enable all security recommendations")
                     additional_input = f"Resource Group: {resource_group}\nSecurity Center Policy: {security_center_policy}"
-
-
+            
+            # AWS Config   
             elif feature == "AWS Configuration":
-                service = st.selectbox("Select AWS Service", ["Select Service", "Hosting", "Networking", "IAM", "Database"])
+                service = st.selectbox(
+                    "Select AWS Service",
+                    [
+                        "Select Service",  # Default option
+                        "Hosting",
+                        "Networking",
+                        "IAM",
+                        "Database",
+                        "Storage",
+                        "DevOps",
+                        "AI & Machine Learning",
+                        "Monitoring",
+                        "Security"
+                    ]
+                )
                 if service == "Hosting":
+                    st.markdown("### AWS Hosting Configuration")
                     stack_name = st.text_input("Stack Name", "my-stack")
                     ec2_instance_type = st.text_input("EC2 Instance Type", "t2.micro")
                     region = st.text_input("Region", "us-east-1")
                     additional_input = f"Stack Name: {stack_name}\nEC2 Instance Type: {ec2_instance_type}\nRegion: {region}"
                 elif service == "Networking":
+                    st.markdown("### AWS Networking Configuration")
                     stack_name = st.text_input("Stack Name", "my-stack")
                     vpc_id = st.text_input("VPC ID", "vpc-123456")
                     subnet_id = st.text_input("Subnet ID", "subnet-123456")
-                    additional_input = f"Stack Name: {stack_name}\nVPC ID: {vpc_id}\nSubnet ID: {subnet_id}"
+                    security_group_id = st.text_input("Security Group ID", "sg-123456")
+                    additional_input = f"Stack Name: {stack_name}\nVPC ID: {vpc_id}\nSubnet ID: {subnet_id}\nSecurity Group ID: {security_group_id}"
+                elif service == "IAM":
+                    st.markdown("### AWS IAM Configuration")
+                    stack_name = st.text_input("Stack Name", "my-stack")
+                    role_name = st.text_input("Role Name", "my-role")
+                    policy_arn = st.text_input("Policy ARN", "arn:aws:iam::aws:policy/AdministratorAccess")
+                    additional_input = f"Stack Name: {stack_name}\nRole Name: {role_name}\nPolicy ARN: {policy_arn}"
+                elif service == "Database":
+                    st.markdown("### AWS Database Configuration")
+                    stack_name = st.text_input("Stack Name", "my-stack")
+                    db_type = st.selectbox("Database Type", ["RDS", "DynamoDB", "Aurora", "Redshift", "DocumentDB"])
+                    if db_type == "RDS":
+                        db_instance_identifier = st.text_input("DB Instance Identifier", "my-rds-instance")
+                        db_instance_class = st.text_input("DB Instance Class", "db.t2.micro")
+                        db_engine = st.selectbox("DB Engine", ["MySQL", "PostgreSQL", "MariaDB", "Oracle", "SQL Server"])
+                        additional_input = f"Stack Name: {stack_name}\nDatabase Type: RDS\nDB Instance Identifier: {db_instance_identifier}\nDB Instance Class: {db_instance_class}\nDB Engine: {db_engine}"
+                    elif db_type == "DynamoDB":
+                        table_name = st.text_input("Table Name", "my-dynamodb-table")
+                        read_capacity_units = st.number_input("Read Capacity Units", 1)
+                        write_capacity_units = st.number_input("Write Capacity Units", 1)
+                        additional_input = f"Stack Name: {stack_name}\nDatabase Type: DynamoDB\nTable Name: {table_name}\nRead Capacity Units: {read_capacity_units}\nWrite Capacity Units: {write_capacity_units}"
+                    elif db_type == "Aurora":
+                        cluster_identifier = st.text_input("Cluster Identifier", "my-aurora-cluster")
+                        db_instance_class = st.text_input("DB Instance Class", "db.r5.large")
+                        engine_mode = st.selectbox("Engine Mode", ["provisioned", "serverless"])
+                        additional_input = f"Stack Name: {stack_name}\nDatabase Type: Aurora\nCluster Identifier: {cluster_identifier}\nDB Instance Class: {db_instance_class}\nEngine Mode: {engine_mode}"
+                    elif db_type == "Redshift":
+                        cluster_identifier = st.text_input("Cluster Identifier", "my-redshift-cluster")
+                        node_type = st.text_input("Node Type", "dc2.large")
+                        number_of_nodes = st.number_input("Number of Nodes", 1)
+                        additional_input = f"Stack Name: {stack_name}\nDatabase Type: Redshift\nCluster Identifier: {cluster_identifier}\nNode Type: {node_type}\nNumber of Nodes: {number_of_nodes}"
+                    elif db_type == "DocumentDB":
+                        cluster_identifier = st.text_input("Cluster Identifier", "my-docdb-cluster")
+                        db_instance_class = st.text_input("DB Instance Class", "db.r5.large")
+                        additional_input = f"Stack Name: {stack_name}\nDatabase Type: DocumentDB\nCluster Identifier: {cluster_identifier}\nDB Instance Class: {db_instance_class}"
+                elif service == "Storage":
+                    st.markdown("### AWS Storage Configuration")
+                    stack_name = st.text_input("Stack Name", "my-stack")
+                    bucket_name = st.text_input("Bucket Name", "my-bucket")
+                    storage_class = st.selectbox("Storage Class", ["STANDARD", "INTELLIGENT_TIERING", "STANDARD_IA", "ONEZONE_IA", "GLACIER", "DEEP_ARCHIVE"])
+                    additional_input = f"Stack Name: {stack_name}\nBucket Name: {bucket_name}\nStorage Class: {storage_class}"
+                elif service == "DevOps":
+                    st.markdown("### AWS DevOps Configuration")
+                    stack_name = st.text_input("Stack Name", "my-stack")
+                    pipeline_name = st.text_input("Pipeline Name", "my-pipeline")
+                    repository_name = st.text_input("Repository Name", "my-repo")
+                    additional_input = f"Stack Name: {stack_name}\nPipeline Name: {pipeline_name}\nRepository Name: {repository_name}"
+                elif service == "AI & Machine Learning":
+                    st.markdown("### AWS AI & Machine Learning Configuration")
+                    stack_name = st.text_input("Stack Name", "my-stack")
+                    sagemaker_notebook_instance_name = st.text_input("SageMaker Notebook Instance Name", "my-notebook")
+                    instance_type = st.text_input("Instance Type", "ml.t2.medium")
+                    additional_input = f"Stack Name: {stack_name}\nSageMaker Notebook Instance Name: {sagemaker_notebook_instance_name}\nInstance Type: {instance_type}"
+                elif service == "Monitoring":
+                    st.markdown("### AWS Monitoring Configuration")
+                    stack_name = st.text_input("Stack Name", "my-stack")
+                    cloudwatch_alarm_name = st.text_input("CloudWatch Alarm Name", "my-alarm")
+                    metric_name = st.text_input("Metric Name", "CPUUtilization")
+                    threshold = st.number_input("Threshold", 80)
+                    additional_input = f"Stack Name: {stack_name}\nCloudWatch Alarm Name: {cloudwatch_alarm_name}\nMetric Name: {metric_name}\nThreshold: {threshold}"
+                elif service == "Security":
+                    st.markdown("### AWS Security Configuration")
+                    stack_name = st.text_input("Stack Name", "my-stack")
+                    kms_key_id = st.text_input("KMS Key ID", "my-kms-key")
+                    security_policy_name = st.text_input("Security Policy Name", "my-security-policy")
+                    additional_input = f"Stack Name: {stack_name}\nKMS Key ID: {kms_key_id}\nSecurity Policy Name: {security_policy_name}"
+
                 # Add more services as needed
-            
+
             # Add GCP Configuration options           
             elif feature == "GCP Configuration":
                 service = st.selectbox(
@@ -544,7 +627,7 @@ class GUI:
                     project_id = st.text_input("Project ID", "my-gcp-project")
                     security_policies = st.text_area("Security Policies", "Enable all security recommendations")
                     additional_input = f"Project ID: {project_id}\nSecurity Policies: {security_policies}"
-            
+
             elif feature == "Firebase Configuration":
                 project_name = st.text_input("Project Name", "my-firebase-project")
                 features = st.text_area("Features to enable", "Authentication, Firestore")
@@ -693,7 +776,7 @@ class GUI:
         elif feature == "Azure Configuration":
             internal_guidance = "Include detailed resource definitions, dependencies, and parameterized templates for flexibility."
             self.prompt = f"Create an Azure Resource Manager template for {service} with details: {additional_input}. {internal_guidance}"
-        
+
         elif feature == "Azure Configuration":
             service = st.selectbox(
                 "Select Azure Service",
@@ -795,14 +878,14 @@ class GUI:
             if st.button("Start") and service != "Select Service":
                 self.start_feature(feature, additional_input)
 
-        
+
         elif feature == "AWS Configuration":
             internal_guidance = "Ensure the template includes IAM roles and policies, and follows AWS best practices for security and scalability."
             self.prompt = f"Create a CloudFormation template for {service} with details: {additional_input}. {internal_guidance}"
         elif feature == "GCP Configuration":
             internal_guidance = "Include configurations for IAM, networking, and resource management according to Google Cloud best practices."
             self.prompt = f"Create a Google Cloud Deployment Manager template for {service} with details: {additional_input}. {internal_guidance}"
-        
+
         elif feature == "Firebase Configuration":
             internal_guidance = "Ensure the configuration includes authentication, database rules, and hosting settings."
             self.prompt = f"Create a Firebase configuration with details: {additional_input}. {internal_guidance}"
