@@ -11,7 +11,7 @@
 
 # Agentic DevOps 
 
-![Agentic Engineering](https://github.com/ruvnet/agentic-devops/blob/main/assets/2.png)
+[![Agentic Engineering](https://github.com/ruvnet/agentic-devops/blob/main/assets/2.png)](https://devops.ruv.io)
 
 ## Introduction
 
