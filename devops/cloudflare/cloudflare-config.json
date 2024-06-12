@@ -1,0 +1,41 @@
+{
+  "projectName": "my-cloudflare-project",
+  "dnsRecords": [
+    {
+      "type": "A",
+      "name": "example.com",
+      "content": "192.0.2.1",
+      "ttl": 3600,
+      "proxied": false
+    },
+    {
+      "type": "CNAME",
+      "name": "www",
+      "content": "example.com",
+      "ttl": 3600,
+      "proxied": false
+    },
+    {
+      "type": "TXT",
+      "name": "example.com",
+      "content": "v=spf1 include:example.com ~all",
+      "ttl": 3600
+    }
+  ],
+  "securitySettings": {
+    "ssl": "full",
+    "firewallRules": [
+      {
+        "action": "allow",
+        "description": "Allow all traffic",
+        "filter": {
+          "expression": "true"
+        }
+      }
+    ]
+  },
+  "workersSettings": {
+    "script": "addEventListener('fetch', event => { event.respondWith(handleRequest(event.request)) })",
+    "bindings": []
+  }
+}
