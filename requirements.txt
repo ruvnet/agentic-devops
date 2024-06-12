@@ -12,6 +12,6 @@ alembic
 httpx
 pydantic
 python-dotenv
-lionagi
+lionagi==0.2.1
 wheel
 setuptools
