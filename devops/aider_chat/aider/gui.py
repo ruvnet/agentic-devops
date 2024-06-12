@@ -130,7 +130,7 @@ class GUI:
     def do_sidebar(self):
         with st.sidebar:
             st.title("Agentic Devops")
-            st.caption("Version 0.01rc")
+            st.caption("Version 0.01.4rc")
 
             # Add a primary dropdown menu for features
             feature = st.selectbox(
@@ -456,19 +456,95 @@ class GUI:
                     subnet_id = st.text_input("Subnet ID", "subnet-123456")
                     additional_input = f"Stack Name: {stack_name}\nVPC ID: {vpc_id}\nSubnet ID: {subnet_id}"
                 # Add more services as needed
+            
+            # Add GCP Configuration options           
             elif feature == "GCP Configuration":
-                service = st.selectbox("Select GCP Service", ["Select Service", "Hosting", "Networking", "IAM", "Database"])
+                service = st.selectbox(
+                    "Select GCP Service",
+                    [
+                        "Select Service",  # Default option
+                        "Hosting",
+                        "Networking",
+                        "IAM",
+                        "Database",
+                        "Storage",
+                        "DevOps",
+                        "AI & Machine Learning",
+                        "Monitoring",
+                        "Security"
+                    ]
+                )
                 if service == "Hosting":
+                    st.markdown("### GCP Hosting Configuration")
                     project_id = st.text_input("Project ID", "my-gcp-project")
                     instance_name = st.text_input("Instance Name", "my-instance")
                     zone = st.text_input("Zone", "us-central1-a")
-                    additional_input = f"Project ID: {project_id}\nInstance Name: {instance_name}\nZone: {zone}"
+                    machine_type = st.text_input("Machine Type", "n1-standard-1")
+                    additional_input = f"Project ID: {project_id}\nInstance Name: {instance_name}\nZone: {zone}\nMachine Type: {machine_type}"
                 elif service == "Networking":
+                    st.markdown("### GCP Networking Configuration")
                     project_id = st.text_input("Project ID", "my-gcp-project")
                     vpc_name = st.text_input("VPC Name", "my-vpc")
                     subnet_name = st.text_input("Subnet Name", "my-subnet")
-                    additional_input = f"Project ID: {project_id}\nVPC Name: {vpc_name}\nSubnet Name: {subnet_name}"
-                # Add more services as needed
+                    region = st.text_input("Region", "us-central1")
+                    additional_input = f"Project ID: {project_id}\nVPC Name: {vpc_name}\nSubnet Name: {subnet_name}\nRegion: {region}"
+                elif service == "IAM":
+                    st.markdown("### GCP IAM Configuration")
+                    project_id = st.text_input("Project ID", "my-gcp-project")
+                    role_assignment_name = st.text_input("Role Assignment Name", "my-role-assignment")
+                    role_definition = st.selectbox("Role Definition", ["Owner", "Editor", "Viewer", "Custom Role"])
+                    principal_id = st.text_input("Principal ID (User/Service Account ID)", "user-or-service-account-id")
+                    additional_input = f"Project ID: {project_id}\nRole Assignment Name: {role_assignment_name}\nRole Definition: {role_definition}\nPrincipal ID: {principal_id}"
+                elif service == "Database":
+                    st.markdown("### GCP Database Configuration")
+                    project_id = st.text_input("Project ID", "my-gcp-project")
+                    db_type = st.selectbox("Database Type", ["Cloud SQL", "Firestore", "Bigtable", "Spanner"])
+                    if db_type == "Cloud SQL":
+                        instance_id = st.text_input("Instance ID", "my-cloud-sql-instance")
+                        db_version = st.selectbox("Database Version", ["MySQL 5.7", "MySQL 8.0", "PostgreSQL 11", "PostgreSQL 12"])
+                        additional_input = f"Project ID: {project_id}\nDatabase Type: Cloud SQL\nInstance ID: {instance_id}\nDatabase Version: {db_version}"
+                    elif db_type == "Firestore":
+                        mode = st.selectbox("Mode", ["Native Mode", "Datastore Mode"])
+                        additional_input = f"Project ID: {project_id}\nDatabase Type: Firestore\nMode: {mode}"
+                    elif db_type == "Bigtable":
+                        instance_id = st.text_input("Instance ID", "my-bigtable-instance")
+                        cluster_id = st.text_input("Cluster ID", "my-cluster")
+                        additional_input = f"Project ID: {project_id}\nDatabase Type: Bigtable\nInstance ID: {instance_id}\nCluster ID: {cluster_id}"
+                    elif db_type == "Spanner":
+                        instance_id = st.text_input("Instance ID", "my-spanner-instance")
+                        config = st.text_input("Instance Config", "regional-us-central1")
+                        additional_input = f"Project ID: {project_id}\nDatabase Type: Spanner\nInstance ID: {instance_id}\nInstance Config: {config}"
+                elif service == "Storage":
+                    st.markdown("### GCP Storage Configuration")
+                    project_id = st.text_input("Project ID", "my-gcp-project")
+                    bucket_name = st.text_input("Bucket Name", "my-storage-bucket")
+                    location = st.text_input("Location", "US")
+                    storage_class = st.selectbox("Storage Class", ["Standard", "Nearline", "Coldline", "Archive"])
+                    additional_input = f"Project ID: {project_id}\nBucket Name: {bucket_name}\nLocation: {location}\nStorage Class: {storage_class}"
+                elif service == "DevOps":
+                    st.markdown("### GCP DevOps Configuration")
+                    project_id = st.text_input("Project ID", "my-gcp-project")
+                    repo_name = st.text_input("Repository Name", "my-repo")
+                    pipeline_name = st.text_input("Pipeline Name", "my-pipeline")
+                    additional_input = f"Project ID: {project_id}\nRepository Name: {repo_name}\nPipeline Name: {pipeline_name}"
+                elif service == "AI & Machine Learning":
+                    st.markdown("### GCP AI & Machine Learning Configuration")
+                    project_id = st.text_input("Project ID", "my-gcp-project")
+                    region = st.text_input("Region", "us-central1")
+                    ml_engine = st.text_input("ML Engine", "AI Platform")
+                    additional_input = f"Project ID: {project_id}\nRegion: {region}\nML Engine: {ml_engine}"
+                elif service == "Monitoring":
+                    st.markdown("### GCP Monitoring Configuration")
+                    project_id = st.text_input("Project ID", "my-gcp-project")
+                    workspace_name = st.text_input("Workspace Name", "my-monitoring-workspace")
+                    alert_policies = st.text_area("Alert Policies (comma separated)", "High CPU,Low Memory")
+                    additional_input = f"Project ID: {project_id}\nWorkspace Name: {workspace_name}\nAlert Policies: {alert_policies}"
+                elif service == "Security":
+                    st.markdown("### GCP Security Configuration")
+                    project_id = st.text_input("Project ID", "my-gcp-project")
+                    security_policies = st.text_area("Security Policies", "Enable all security recommendations")
+                    additional_input = f"Project ID: {project_id}\nSecurity Policies: {security_policies}"
+            
             elif feature == "Firebase Configuration":
                 project_name = st.text_input("Project Name", "my-firebase-project")
                 features = st.text_area("Features to enable", "Authentication, Firestore")
@@ -726,6 +802,7 @@ class GUI:
         elif feature == "GCP Configuration":
             internal_guidance = "Include configurations for IAM, networking, and resource management according to Google Cloud best practices."
             self.prompt = f"Create a Google Cloud Deployment Manager template for {service} with details: {additional_input}. {internal_guidance}"
+        
         elif feature == "Firebase Configuration":
             internal_guidance = "Ensure the configuration includes authentication, database rules, and hosting settings."
             self.prompt = f"Create a Firebase configuration with details: {additional_input}. {internal_guidance}"
@@ -1088,7 +1165,7 @@ class GUI:
 def gui_main():
     st.set_page_config(
         layout="wide",
-        page_title="Agentic Devops 2",
+        page_title="Agentic Devops",
         page_icon="https://aider.chat/assets/favicon-32x32.png",
         menu_items={
             "Get Help": "https://aider.chat/docs/faq.html",

@@ -48,4 +48,4 @@ setup(
 )
 
 # Ensure that the aider_chat package is installed
-os.system(f'pip install -e devops/aider_chat')
+os.system(f'pip install devops/aider_chat')

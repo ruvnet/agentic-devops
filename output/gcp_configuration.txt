@@ -1,0 +1,4 @@
+Create a Google Cloud Deployment Manager template for Hosting with details: Project ID: my-gcp-project
+Instance Name: my-instance
+Zone: us-central1-a
+Machine Type: n1-standard-1. Include configurations for IAM, networking, and resource management according to Google Cloud best practices.
