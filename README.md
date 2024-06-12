@@ -76,6 +76,11 @@ The Agentic DevOps tool requires certain environment variables to be set for aut
 
 You can set these environment variables either in your system environment or by creating a `.env` file in the project root directory.
 
+5. Run the App
+   ```bash
+   agentic-devops
+   ```
+
 ## Menu
 
 The Agentic DevOps tool provides an interactive menu-based interface for navigating and selecting different features. Here is an outline of the CLI menu options:
