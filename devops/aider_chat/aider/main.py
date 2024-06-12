@@ -1,3 +1,4 @@
+# /aider/main.py --model gpt3-turbo --stream --voice-language en-US --pretty --auto-commits --git --show-diffs --auto-lint --auto-test --dry-run --verbose --message "Create a Bash script that installs dependencies for a Python project." --files /aider/modules/bash.py /aider/modules/utils.py /aider/modules/coder.py /aider/modules/main.py /aider/modules/cli.py /aider/modules/commands.py /aider/modules/io.py /aider/modules/models.py /aider/modules/versioncheck.py /aider/modules/dump.py /aider/modules/git.py /aider/modules/litellm.py /aider/modules/repo.py /aider/modules/args.py /aider/modules/coders.py /aider/modules/utils.py /aider/modules/io.py /aider/modules/versioncheck.py /aider/modules/dump.py /aider/modules/git.py /aider/modules/litellm.py /aider/modules/repo.py /aider/modules/args.py /aider/modules/coders.py
 import configparser
 import os
 import re

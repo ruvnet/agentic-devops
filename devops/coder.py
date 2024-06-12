@@ -1,3 +1,4 @@
+# coder.py is a new file that contains the main_menu and coder_menu functions. The main_menu function displays the main menu options and prompts the user to choose an option. The coder_menu function displays the Agentic DevOps menu options and calls the appropriate function based on the user's choice. The coder_menu function is called recursively to allow the user to navigate back to the main menu.
 import click
 import subprocess
 import importlib.util

@@ -1,3 +1,4 @@
+# gui.py is a new file that contains the GUI class, which is used to interact with the Streamlit GUI. The GUI class includes methods for displaying the main menu, creating Dockerfiles, Bash scripts, Kubernetes configurations, CI/CD pipelines, and various cloud configurations. The GUI class also includes methods for handling user input and calling the appropriate functions based on the user's choices. The GUI class interacts with the coder.py file to access the main menu and coder menu functions. 
 import os
 import random
 import sys

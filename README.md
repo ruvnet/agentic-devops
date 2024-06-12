@@ -1,100 +1,175 @@
-# Agentic DevOps
+```
+        ___                    __  _         ____                            
+       /   | ____ ____  ____  / /_(______   / __ \___ _   ______  ____  _____
+      / /| |/ __ `/ _ \/ __ \/ __/ / ___/  / / / / _ | | / / __ \/ __ \/ ___/
+     / ___ / /_/ /  __/ / / / /_/ / /__   / /_/ /  __| |/ / /_/ / /_/ (__  ) 
+    /_/  |_\__, /\___/_/ /_/\__/_/\___/  /_____/\___/|___/\____/ .___/____/  
+          /____/                                              /_/            
 
-Agentic DevOps is a powerful, interactive Command-Line Interface (CLI) designed to streamline and automate the development, deployment, and management of applications on Azure. By leveraging the capabilities of GitHub Copilot, this CLI provides intelligent, real-time guidance and suggestions, making it easier to perform complex DevOps tasks with minimal effort. Whether you are deploying a simple web app or managing extensive cloud resources, Agentic DevOps offers a seamless, agentic experience for developers and DevOps professionals alike.
+    Welcome to Wizard of DevOps! Let's get started with your DevOps tasks.
+```
 
-## Features
+# Agentic DevOps 
 
-- **Interactive Guidance**: Utilize GitHub Copilot CLI to receive contextual suggestions and interactive guidance for DevOps tasks.
-- **Azure Integration**: Comprehensive support for Azure services, including resource management, web app deployment, and configuration management.
-- **Automated Testing**: Integrated testing capabilities to ensure deployment integrity, with iterative feedback and automatic fixes.
-- **Error Handling and Feedback Loop**: Intelligent error detection and resolution with a feedback loop to Copilot for continuous improvement.
-- **Command Suite**: A robust set of commands to manage the entire lifecycle of your deployments, from setup and creation to updates and removal.
+![Agentic Engineering](./assets/2.png)
 
-## Commands
+## Introduction
 
-- `list-deployments`: List all existing deployments with detailed information.
-- `setup-deployment`: Set up the necessary Azure resources for a new deployment.
-- `create-deployment`: Create and deploy a new application.
-- `update-deployment`: Update an existing deployment with new configurations or code.
-- `remove-deployment`: Remove an existing deployment.
-- `copilot-suggest`: Get suggestions from GitHub Copilot for various DevOps tasks.
+The Agentic DevOps tool is designed to streamline and automate various DevOps tasks and configurations. This versatile tool supports both a command-line interface (CLI) and a web-based user interface (WebUI), making it accessible for both terminal enthusiasts and those who prefer a graphical interface. 
+
+### What It Does
+
+Agentic DevOps automates the creation of essential DevOps artifacts such as Dockerfiles, Bash scripts, Kubernetes configurations, CI/CD pipelines, and cloud configurations for major providers like Azure, AWS, GCP, Firebase, Supabase, and Cloudflare. It also supports different development architectures, including microservices, serverless, monolithic, event-driven, and API-first development.
+
+### Why It's Useful
+
+By automating repetitive and complex tasks, Agentic DevOps helps reduce human error, speed up deployment processes, and ensure consistent configurations across different environments. It's particularly useful for teams practicing continuous integration and continuous deployment (CI/CD), enabling faster and more reliable software delivery.
+
+### Key Features
+
+- **Multi-platform Support**: Automates configurations for Azure, AWS, GCP, Firebase, Supabase, and Cloudflare.
+- **Versatile Development Approaches**: Supports microservices, serverless, monolithic, event-driven, and API-first architectures.
+- **Comprehensive Artifact Generation**: Creates Dockerfiles, Bash scripts, Kubernetes configurations, and CI/CD pipelines.
+- **User-friendly Interfaces**: Accessible via both CLI and WebUI.
+- **Customizable**: Easily extendable to include new modules and configurations.
+- **Environment Management**: Helps manage environment variables and secrets.
+
+## Agentic Engineering
+Agentic Engineering is a modern approach to software development that integrates artificial intelligence and automation to streamline engineering processes. This methodology enhances efficiency by automating routine tasks, optimizing resource allocation, and providing intelligent insights to support decision-making. By leveraging AI, Agentic Engineering helps development teams achieve higher productivity, better code quality, and faster time-to-market, making it an invaluable tool in today's fast-paced technology landscape.
 
 ## Installation
 
-1. **Clone the Repository**
-   ```sh
-   git clone https://github.com/your-username/agentic-devops.git
+To install the Agentic DevOps tool, follow these steps:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/ruvnet/agentic-devops.git
+   ```
+
+2. Navigate to the project directory:
+   ```bash
    cd agentic-devops
    ```
 
-2. **Set Up Virtual Environment**
-   ```sh
-   python -m venv env
-   source env/bin/activate  # On Windows use: .\env\Scripts\activate
-   ```
-
-3. **Install Dependencies**
-   ```sh
+3. Install the required dependencies:
+   ```bash
    pip install -r requirements.txt
    ```
 
-4. **Install GitHub CLI and Copilot CLI**
-   ```sh
-   brew install gh  # macOS
-   sudo apt install gh  # Debian/Ubuntu
-   choco install gh  # Windows
-   gh extension install github/copilot-cli
-   ```
+4. Set up the necessary environment variables (see the "Environment Secrets" section below).
 
-5. **Configure Azure CLI**
-   ```sh
-   curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-   ```
+## Environment Secrets
+
+The Agentic DevOps tool requires certain environment variables to be set for authentication and configuration purposes. Make sure to set the following environment variables:
+
+- `AZURE_CLIENT_ID`: Your Azure client ID.
+- `AZURE_CLIENT_SECRET`: Your Azure client secret.
+- `AZURE_APP_CONFIG_CON_STR`: Your Azure App Configuration connection string.
+- `AWS_ACCESS_KEY_ID`: Your AWS access key ID.
+- `AWS_SECRET_ACCESS_KEY`: Your AWS secret access key.
+- `GCP_PROJECT_ID`: Your GCP project ID.
+- `GCP_SERVICE_ACCOUNT_KEY`: Your GCP service account key.
+- `FIREBASE_API_KEY`: Your Firebase API key.
+- `SUPABASE_URL`: Your Supabase project URL.
+- `SUPABASE_KEY`: Your Supabase project API key.
+- `CLOUDFLARE_API_KEY`: Your Cloudflare API key.
+
+You can set these environment variables either in your system environment or by creating a `.env` file in the project root directory.
+
+## Menu
+
+The Agentic DevOps tool provides an interactive menu-based interface for navigating and selecting different features. Here is an outline of the CLI menu options:
+
+### Main Menu
+```plaintext
+📋 Main Menu
+1. 📄 Agentic DevOps
+2. 🚀 Agentic Deployment
+3. ❓ Help
+4. 🔥 Exit
+Enter your choice: 
+```
+
+### Agentic DevOps Menu
+```plaintext
+📋 Agentic DevOps Menu
+1.    Start Agentic DevOps WebUI
+2.    Create Dockerfile
+3.    Create Bash Script
+4.    Create Kubernetes Configuration
+5.    Create CI/CD Pipeline
+6.    Azure Configuration
+7.    AWS Configuration
+8.    GCP Configuration
+9.    Firebase Configuration
+10.   Developer Configuration
+11.   Settings
+12.   Back to Main Menu
+Enter your choice: 
+```
+
+### Agentic Deployment Menu
+```plaintext
+🚀 Agentic Deployment
+1. 📃 List Deployments
+2. 🛠️ Setup Deployment
+3. 🚀 Create Deployment
+4. 🔄 Update Deployment
+5. ❌ Remove Deployment
+6. 🔙 Return to Main Menu
+Enter your choice: 
+```
 
 ## Usage
 
-### List Deployments
-```sh
-agentic-devops list-deployments
+To use the Agentic DevOps tool, run the following command:
+```bash
+python main.py
 ```
+Then, navigate through the menu options to select the desired feature. Follow the prompts to provide necessary inputs and configurations. Generated files or configurations will be saved in the specified output directory.
 
-### Set Up Deployment
-```sh
-agentic-devops setup-deployment
-```
+## WebUI
 
-### Create Deployment
-```sh
-agentic-devops create-deployment
-```
+The Agentic DevOps tool also provides a web-based user interface (WebUI) for a more intuitive and visual experience. The WebUI uses the same menu structure as the CLI, making it easy to switch between the two interfaces.
 
-### Update Deployment
-```sh
-agentic-devops update-deployment
-```
+### Start the WebUI
+To start the WebUI, select "Start Agentic DevOps WebUI" from the Agentic DevOps menu.
 
-### Remove Deployment
-```sh
-agentic-devops remove-deployment
-```
+### Access the WebUI
+Open a web browser and navigate to `http://localhost:8501`.
 
-### Get Copilot Suggestion
-```sh
-agentic-devops copilot-suggest "Create a Dockerfile for a FastAPI application"
-```
+### WebUI Options
+- **Agentic Development**: Choose from different development approaches like microservices, serverless, monolithic, event-driven, API-first, and more.
+- **Create Dockerfile**: Input base image, packages to install, and generate a Dockerfile.
+- **Create Bash Script**: Define the script purpose and include necessary commands.
+- **Create Kubernetes Configuration**: Provide deployment name, container image, cluster name, and namespaces.
+- **Create CI/CD Pipeline**: Select a CI/CD provider and define stages for the pipeline.
+- **Azure Configuration**: Configure Azure services such as hosting, networking, IAM, database, storage, DevOps, AI & ML, monitoring, and security.
+- **AWS Configuration**: Configure AWS services like hosting, networking, IAM, and database.
+- **GCP Configuration**: Configure GCP services including hosting, networking, IAM, and database.
+- **Firebase Configuration**: Enable Firebase features for your project.
+- **Supabase Configuration**: Configure Supabase services such as hosting, authentication, storage, and database.
+- **Cloudflare Configuration**: Set up Cloudflare services for DNS, security, and workers.
+- **Developer Configuration**: Set up development environments for languages like Python, Node.js, Java, Rust, Go, C#, Ruby, PHP, and C++.
 
-## Contribution
+## Advanced Usage
 
-Contributions are welcome! Please fork the repository and submit a pull request with your improvements.
+For advanced users, the Agentic DevOps tool offers additional features and customization options:
+
+### Custom Scripts
+Add custom scripts and configurations in the `./modules` directory. Ensure they follow the same structure and import necessary modules.
+
+### Integration with CI/CD
+Integrate the tool with external CI/CD pipelines by including it in your build scripts and using its CLI commands.
+
+### Extending Functionality
+Extend the functionality by adding new modules and commands in `coder.py` and updating `main.py` to include these new commands.
+
+## Contributing
+
+Contributions to the Agentic DevOps tool are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request on the GitHub repository.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-For questions or support, please open an issue in the repository or contact the maintainer at [your-email@example.com](mailto:your-email@example.com).
-
----
-
-Agentic DevOps is your companion for a streamlined and intelligent DevOps experience on Azure. Start automating your deployments and managing your cloud resources efficiently today!
+The Agentic DevOps tool is open-source software licensed under the [MIT License](https://github.com/ruvnet/agentic-devops/blob/main/LICENSE).
+ 
