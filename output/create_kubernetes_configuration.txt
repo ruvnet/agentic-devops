@@ -1,0 +1,4 @@
+Create a Kubernetes config for a web application with details: Deployment Name: baxter
+Container Image: my-app:latest
+Cluster Name: my-cluster
+Namespaces: default, production. Ensure the configuration includes resource limits, readiness and liveness probes, and follows Kubernetes best practices.

@@ -1,3 +1,1 @@
-Create an Azure Resource Manager template for AI & Machine Learning with details: Workspace Name: my-ml-workspace
-Resource Group: my-resource-group
-Region: East US. Include detailed resource definitions, dependencies, and parameterized templates for flexibility.
+Create an Azure Resource Manager template for Select Service with details: . Include detailed resource definitions, dependencies, and parameterized templates for flexibility.
