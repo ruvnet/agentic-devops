@@ -3,7 +3,8 @@
 # Function to display the menu
 show_menu() {
     echo "1) Install ./chat"
-    echo "2) Exit"
+    echo "2) Run CLI"
+    echo "3) Exit"
 }
 
 # Function to install ./chat
@@ -14,7 +15,11 @@ install_chat() {
     echo "./chat installed successfully."
 }
 
-# Main script logic
+# Function to run the CLI
+run_cli() {
+    echo "Running CLI..."
+    python3 cli.py hello
+}
 while true; do
     show_menu
     read -rp "Enter your choice: " choice
@@ -23,6 +28,9 @@ while true; do
             install_chat
             ;;
         2)
+            run_cli
+            ;;
+        3)
             echo "Exiting..."
             exit 0
             ;;
