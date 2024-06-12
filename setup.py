@@ -14,7 +14,7 @@ with open(requirements_path) as f:
     requirements = f.read().splitlines()
 
 # Ensure that __version__ is defined in the agentic_devops package
-__version__ = "0.0.7"
+__version__ = "0.0.8"
 
 # Read the long description from the README.md file
 readme_path = base_dir / "README.md"
@@ -29,7 +29,7 @@ with open(readme_path, "r", encoding="utf-8") as f:
 # Setup configuration
 setup(
     name="Agentic-DevOps",
-    version="0.0.7",
+    version="0.0.8",
     author="rUv",
     author_email="null@ruv.net",
     description="Agentic DevOps Tool for automating and managing various DevOps tasks and configurations.",

@@ -11,7 +11,7 @@
 
 # Agentic DevOps 
 
-[![Agentic Engineering](https://github.com/ruvnet/agentic-devops/blob/main/assets/2.png)](https://devops.ruv.io)
+[![Agentic Engineering](https://raw.githubusercontent.com/ruvnet/agentic-devops/main/assets/2.png)](https://devops.ruv.io)
 
 ## Introduction
 
@@ -117,6 +117,7 @@ The Agentic DevOps tool also provides a web-based user interface (WebUI) for a m
 To start the WebUI, select "Start Agentic DevOps WebUI" from the Agentic DevOps menu.
 
 #### Access the WebUI
+[![Agentic Engineering](https://raw.githubusercontent.com/ruvnet/agentic-devops/main/assets/1.png)](https://devops.ruv.io)
 
 Open a web browser and navigate to `http://localhost:8501`.
 
