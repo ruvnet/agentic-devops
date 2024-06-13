@@ -379,7 +379,7 @@ async def agentic_chat():
         interval_tokens=100_000,    # retain rate limit, need to pass same
         interval_requests=1_000,    # imodel object to maintain rate limit across branch 
         interval=60, 
-        costs = (15, 30)        # prompt tokens price, completion tokens price (per million tokens)
+        costs = (5, 15)        # prompt tokens price, completion tokens price (per million tokens)
     )
     session = await initialize_lionagi_session(imodel=imodel)
     click.echo("🚀 Welcome to the interactive DevOps chat! Type 'exit' to leave the chat.")
