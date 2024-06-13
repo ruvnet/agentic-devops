@@ -72,7 +72,9 @@ async def handle_user_input(session: Session, user_input: str | dict, imodel=Non
         # for current task
         branch = session.new_branch()
         potential_actions = await branch.chat(
-            instruction=instruction, context=action_prompt, model="gpt-4oo")
+            instruction=instruction, 
+            context=action_prompt
+        )
 
         verbose_output("\n📝 Potential actions:")
         verbose_output(potential_actions)
