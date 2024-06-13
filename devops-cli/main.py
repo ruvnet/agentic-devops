@@ -13,6 +13,9 @@ from azure.appconfiguration import AzureAppConfigurationClient
 import asyncio
 import re
 from concurrent.futures import ThreadPoolExecutor
+from .cli.agentic import initialize_lionagi_session, handle_user_input
+from lionagi import iModel
+
 
 # Add import for the coder module
 import coder
@@ -370,7 +373,15 @@ def deployment_menu():
         deployment_menu()
 
 async def agentic_chat():
-    # session = await initialize_lionagi_session()
+    imodel = iModel(
+        model="gpt-4o", 
+        provider="openai",
+        interval_tokens=100_000,    # retain rate limit, need to pass same
+        interval_requests=1_000,    # imodel object to maintain rate limit across branch 
+        interval=60, 
+        costs = (15, 30)        # prompt tokens price, completion tokens price (per million tokens)
+    )
+    session = await initialize_lionagi_session(imodel=imodel)
     click.echo("🚀 Welcome to the interactive DevOps chat! Type 'exit' to leave the chat.")
     
     while True:
