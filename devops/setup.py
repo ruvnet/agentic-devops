@@ -45,4 +45,10 @@ setup(
         "Programming Language :: Python",
         "Topic :: Software Development",
     ],
+    extras_require={
+        "dev": [
+            "flask",
+            "flask-cors",
+        ],
+    },
 )
