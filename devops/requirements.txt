@@ -329,3 +329,5 @@ zipp==3.18.2
     # via importlib-metadata
 flask
 flask-cors
+flask
+flask-cors
