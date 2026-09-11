@@ -4,8 +4,8 @@ const digest = x => createHash('sha256').update(x).digest('hex');
 const json = x => JSON.stringify(x,null,2)+'\n';
 function fail(s){throw new Error(s)}
 function obj(x,keys){if(!x||typeof x!=='object'||Array.isArray(x)||Object.keys(x).some(k=>!keys.includes(k)))fail('Unexpected object or field');}
-const name = x=> typeof x==='string'&&/^[a-z][a-z0-9-]{0,38}[a-z0-9]$/.test(x);
-const image = x => typeof x==='string' && x.length<=240 && /^[a-z0-9][a-z0-9./_-]*@sha256:[a-f0-9]{64}$/.test(x);
+const name = x=> typeof x==='string'&&/^[a-z](?:[a-z0-9-]{0,38}[a-z0-9])?$/.test(x);
+const image = x => typeof x==='string' && x.length<=240 && /^[a-z0-9]+(?:[._-][a-z0-9]+)*(?:\/[a-z0-9]+(?:[._-][a-z0-9]+)*)*@sha256:[a-f0-9]{64}$/.test(x);
 export function spec(x){
  obj(x,['name','namespace','image','baseImage','port','replicas','cpuMillis','memoryMiB']);
  if(!name(x.name)||!name(x.namespace)||!image(x.image)||!image(x.baseImage))fail('Names and digest-pinned image references required');

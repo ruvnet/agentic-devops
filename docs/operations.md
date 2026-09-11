@@ -2,7 +2,7 @@
 
 The local artifact planner has no deployment identity. Its operating system principal can only invoke the installed source; MCP provides no remote execution or file export operation. Run the host under a dedicated local account if other local files are sensitive.
 
-Create a specification with name, namespace, image and baseImage. Optional numeric fields are port (1024..65535), replicas (1..20), cpuMillis (10..4000), memoryMiB (16..8192). Image references must be digest pinned. Names use lowercase DNS label characters with a maximum of 40 characters and minimum of two.
+Create a specification with name, namespace, image and baseImage. Optional numeric fields are port (1024..65535), replicas (1..20), cpuMillis (10..4000), memoryMiB (16..8192). Image references must be digest pinned. Names use lowercase DNS label characters with a maximum of 40 characters and minimum of one. Image repository paths use lowercase alphanumeric components separated by single dots, underscores or hyphens; custom registry ports and broader OCI name variants are intentionally unsupported.
 
 Preview input: `{ "before": <validated old bundle>, "after": <validated new bundle> }`.
 
