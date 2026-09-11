@@ -1,3 +1,5 @@
+raise RuntimeError("Retired unsafe legacy execution path. Use Node 22+: node src/cli.mjs status. See docs/migration.md.")
+
 import click
 import subprocess
 import os

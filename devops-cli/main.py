@@ -1,3 +1,5 @@
+raise RuntimeError("Retired unsafe legacy execution path. Use Node 22+: node src/cli.mjs status. See docs/migration.md.")
+
 # main.py and coder.py are two separate files. The main.py file contains the main CLI logic, while the coder.py file contains the menu options and functions related to the coder module. The main.py file imports the coder module and calls the coder_menu function to display the coder menu options.
 import click
 import subprocess
