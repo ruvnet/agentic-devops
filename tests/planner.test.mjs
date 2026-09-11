@@ -8,3 +8,15 @@ test('preview preserves identity and rollback restores prior bytes with compare 
 test('CLI exercises real JSON roundtrip and rejects invalid input',()=>{const p=spawnSync(process.execPath,['src/cli.mjs','plan'],{input:JSON.stringify(fixture),encoding:'utf8'});assert.equal(p.status,0,p.stderr);const v=spawnSync(process.execPath,['src/cli.mjs','validate'],{input:p.stdout,encoding:'utf8'});assert.equal(v.status,0,v.stderr);assert.equal(JSON.parse(v.stdout).valid,true);const bad=spawnSync(process.execPath,['src/cli.mjs','plan'],{input:'x'.repeat(65537),encoding:'utf8'});assert.equal(bad.status,2)});
 
 test('restricted image paths reject empty or traversal components; single label accepted',()=>{assert.equal(plan({...fixture,name:'a'}).spec.name,'a');for(const repo of ['a//','a/../b','a/','/a','a..b'])assert.throws(()=>plan({...fixture,image:repo+'@sha256:'+'a'.repeat(64)}))});
+
+test('rollback never reuses prior validation for later mutated inputs',()=>{
+ const previous=plan(fixture),current=plan({...fixture,replicas:3});
+ const input={previous,current,expectedCurrent:current.sha256};
+ assert.deepEqual(rollback(input).target,previous);
+ previous.artifacts['deployment.json']='tampered';
+ assert.throws(()=>rollback(input),/canonical/);
+ input.previous=plan(fixture);current.artifacts.Dockerfile+='RUN malicious\n';
+ assert.throws(()=>rollback(input),/canonical/);
+ const other=plan({...fixture,namespace:'other-team'});
+ assert.throws(()=>rollback({current:other,previous:plan(fixture),expectedCurrent:other.sha256}),/identity/);
+});

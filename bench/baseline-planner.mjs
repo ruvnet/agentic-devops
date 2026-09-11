@@ -28,19 +28,16 @@ export function validate(bundle){
  if(JSON.stringify(bundle)!==JSON.stringify(expected))fail('Bundle differs from canonical approved policy output');
  return {valid:true,sha256:expected.sha256,executionAuthorized:false};
 }
-function sameIdentity(before,after){
- if(before.spec.name!==after.spec.name||before.spec.namespace!==after.spec.namespace)fail('Resource identity cannot change');
-}
 export function preview({before,after}){
  validate(before);validate(after);
- sameIdentity(before,after);
+ if(before.spec.name!==after.spec.name||before.spec.namespace!==after.spec.namespace)fail('Resource identity cannot change');
  const changed=policy.artifacts.filter(k=>before.artifacts[k]!==after.artifacts[k]);
  return {from:before.sha256,to:after.sha256,changed,resourceIdentity:{name:after.spec.name,namespace:after.spec.namespace},executionAuthorized:false};
 }
 export function rollback({current,previous,expectedCurrent}){
  validate(current);validate(previous);
  if(current.sha256!==expectedCurrent)fail('Stale rollback: current digest mismatch');
- sameIdentity(current,previous);
+ preview({before:current,after:previous});
  return {target:previous,from:current.sha256,executionAuthorized:false};
 }
 export const fixture={name:'demo-app',namespace:'demo-team',image:'ghcr.io/example/app@sha256:'+'a'.repeat(64),baseImage:'gcr.io/distroless/static-debian12@sha256:'+'b'.repeat(64)};
