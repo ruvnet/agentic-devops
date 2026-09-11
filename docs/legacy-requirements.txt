@@ -1,0 +1,18 @@
+azure-identity==1.7.0
+azure-mgmt-resource==20.0.0
+azure-mgmt-web==3.0.0
+azure-appconfiguration==1.1.1
+pytest==7.1.1
+litellm
+# Requirements for the backend FastAPI application
+fastapi
+uvicorn
+sqlalchemy
+alembic
+httpx
+pydantic
+python-dotenv
+lionagi
+wheel
+setuptools
+psutil

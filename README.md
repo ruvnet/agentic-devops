@@ -1,180 +1,63 @@
-```
-        ___                    __  _         ____                            
-       /   | ____ ____  ____  / /_(______   / __ \___ _   ______  ____  _____
-      / /| |/ __ `/ _ \/ __ \/ __/ / ___/  / / / / _ | | / / __ \/ __ \/ ___/
-     / ___ / /_/ /  __/ / / / /_/ / /__   / /_/ /  __| |/ / /_/ / /_/ (__  ) 
-    /_/  |_\__, /\___/_/ /_/\__/_/\___/  /_____/\___/|___/\____/ .___/____/  
-          /____/                                              /_/            
+![Agentic DevOps](docs/assets/header.svg)
 
-    Welcome to Wizard of DevOps! Let's get started with your DevOps tasks.
-```
+# Agentic DevOps v2 alpha
 
-# Agentic DevOps 
+Turn a small deployment specification into consistent Docker, Kubernetes and CI files. Review exactly what changes before handing the files to your deployment system. Restore a previous artifact bundle when a change must be reversed.
 
-[![Agentic Engineering](https://raw.githubusercontent.com/ruvnet/agentic-devops/main/assets/2.png)](https://devops.ruv.io)
+This release replaces the historical model driven shell execution interface with a deterministic local planner. It never runs deployment commands, reads cloud credentials or calls a model. Existing Python users must follow the [migration guide](docs/migration.md).
 
-## Introduction
+## Capabilities
 
-The Agentic DevOps tool is designed to streamline and automate various DevOps tasks and configurations. This versatile tool supports both a command-line interface (CLI) and a web-based user interface (WebUI), making it accessible for both terminal enthusiasts and those who prefer a graphical interface. 
+| Capability | Behavior |
+| --- | --- |
+| Artifact generation | Dockerfile, Deployment, Service, NetworkPolicy and GitHub CI template |
+| Policy validation | Rejects mutable image tags, unknown fields, privileged ports, excessive resources and any edited bundle |
+| Preview | Reports changed files while keeping resource name and namespace fixed |
+| Rollback planning | Returns the exact prior validated bundle only when the current digest matches |
+| CLI and MCP | Seven actions share the same implementation and policy |
+| MetaHarness | Repository maintainer profiles, sessions, field memory adapter and host integration |
+| Autogenous | Evidence gates without automatic production promotion |
+| CI delivery | Tests, dependency audit and downloadable artifact/benchmark evidence |
 
+## Install and use
 
-### What It Does
+Requires Node 22 or 24. No API key is required.
 
-Agentic DevOps automates the creation of essential DevOps artifacts such as Dockerfiles, Bash scripts, Kubernetes configurations, CI/CD pipelines, and cloud configurations for major providers like Azure, AWS, GCP, Firebase, Supabase, and Cloudflare. It also supports different development architectures, including microservices, serverless, monolithic, event-driven, and API-first development.
-
-### Why It's Useful
-
-By automating repetitive and complex tasks, Agentic DevOps helps reduce human error, speed up deployment processes, and ensure consistent configurations across different environments. It's particularly useful for teams practicing continuous integration and continuous deployment (CI/CD), enabling faster and more reliable software delivery.
-
-### Key Features
-
-- **Multi-platform Support**: Automates configurations for Azure, AWS, GCP, Firebase, Supabase, and Cloudflare.
-- **Versatile Development Approaches**: Supports microservices, serverless, monolithic, event-driven, and API-first architectures.
-- **Comprehensive Artifact Generation**: Creates Dockerfiles, Bash scripts, Kubernetes configurations, and CI/CD pipelines.
-- **User-friendly Interfaces**: Accessible via both CLI and WebUI.
-- **Customizable**: Easily extendable to include new modules and configurations.
-- **Environment Management**: Helps manage environment variables and secrets.
-
-## Agentic Engineering
-Agentic Engineering is a modern approach to software development that integrates artificial intelligence and automation to streamline engineering processes. This methodology enhances efficiency by automating routine tasks, optimizing resource allocation, and providing intelligent insights to support decision-making. By leveraging AI, Agentic Engineering helps development teams achieve higher productivity, better code quality, and faster time-to-market, making it an invaluable tool in today's fast-paced technology landscape.
-
-## Installation
-```
-pip install agentic-devops
-```
-o
-To install the Agentic DevOps tool, follow these steps:
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/ruvnet/agentic-devops.git
-   ```
-
-2. **Navigate to the project directory:**
-   ```bash
-   cd agentic-devops
-   ```
-
-3. **Create and activate a virtual environment (optional but recommended):**
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-   ```
-
-4. **Install the required dependencies:**
-   ```bash
-   pip install -e .
-   ```
-
-5. **Set up the necessary environment variables (see the "Environment Secrets" section below).**
-
-## Environment Secrets
-
-The Agentic DevOps tool requires certain environment variables to be set for authentication and configuration purposes. Make sure to set the following environment variables:
-
-- `OPENAI_API_KEY` : You OpenAi Key
-
-## Optional Keys
-- `AZURE_CLIENT_ID`: Your Azure client ID.
-- `AZURE_CLIENT_SECRET`: Your Azure client secret.
-- `AZURE_APP_CONFIG_CON_STR`: Your Azure App Configuration connection string.
-- `AWS_ACCESS_KEY_ID`: Your AWS access key ID.
-- `AWS_SECRET_ACCESS_KEY`: Your AWS secret access key.
-- `GCP_PROJECT_ID`: Your GCP project ID.
-- `GCP_SERVICE_ACCOUNT_KEY`: Your GCP service account key.
-- `FIREBASE_API_KEY`: Your Firebase API key.
-- `SUPABASE_URL`: Your Supabase project URL.
-- `SUPABASE_KEY`: Your Supabase project API key.
-- `CLOUDFLARE_API_KEY`: Your Cloudflare API key.
-
-You can set these environment variables either in your system environment or by creating a `.env` file in the project root directory. Here is an example of a `.env` file:
-
-```plaintext
-OPENAI_API_KEY=sk....
+```sh
+npm ci
+npm test
+node src/cli.mjs status
+node src/cli.mjs plan < examples/spec.json > plan.json
+node src/cli.mjs validate < plan.json
+npm run benchmark
 ```
 
-6. **Run the App:**
-   ```bash
-   agentic-devops
-   ```
+The example digests are deliberately fictional fixtures. Replace `image` with an existing, reviewed application image digest and `baseImage` with a verified compatible base digest. The Dockerfile expects an executable `app/server`; it does not compile your application. Registry availability, image signatures, vulnerability scanning and an actual cluster rollout are deployment qualification steps, not claims made by this planner.
 
-## Menu
+Commands `plan`, `validate`, `preview` and `rollback` accept JSON on stdin, bounded to 64 KiB. Output is JSON. Extract the fixed `artifacts` map to a review directory using your trusted deployment tooling. See [operations](docs/operations.md) for request examples and runtime assumptions.
 
-The Agentic DevOps tool provides an interactive menu-based interface for navigating and selecting different features. Here is an outline of the CLI menu options:
-  ```
-        Main Menu:
-        1. Start WebUI 🌐
-        2. Settings ⚙️
-        3. Exit ❌
-  ```
+## Connect an agent
 
-### WebUI
+```json
+{"mcpServers":{"agentic-devops":{"command":"node","args":["/absolute/path/agentic-devops/src/mcp.mjs"]}}}
+```
 
-The Agentic DevOps tool also provides a web-based user interface (WebUI) for a more intuitive and visual experience. The WebUI uses the same menu structure as the CLI, making it easy to switch between the two interfaces.
+Tools: `devops_status`, `devops_plan`, `devops_validate`, `devops_preview`, `devops_rollback`, `devops_test`, `devops_benchmark`. Each takes `{ "input": { ... } }`. Policy resource: `ruv://agentic-devops/policy`.
 
-#### Start the WebUI
+Tests launched through the CLI or MCP require the local operator to set `AGENTIC_DEVOPS_ALLOW_TESTS=1`. The subprocess has a 30 second deadline, 64 KiB output limit, one concurrent execution and a stripped environment. MCP callers cannot choose commands, filesystem paths or environment variables. Stdio runs with the launching user's identity and is intended for trusted local hosts.
 
-To start the WebUI, select "Start Agentic DevOps WebUI" from the Agentic DevOps menu.
+## Security and evidence
 
-#### Access the WebUI
-[![Agentic Engineering](https://raw.githubusercontent.com/ruvnet/agentic-devops/main/assets/1.png)](https://devops.ruv.io)
+Kubernetes output uses a nonroot UID, dropped capabilities, read only root filesystem, no service account token, resource limits and deny all egress. Same namespace pods may reach the service. NetworkPolicy requires a supporting CNI. A local digest proves byte consistency, not authorship or deployment authorization.
 
-Open a web browser and navigate to `http://localhost:8501`.
+Read the [security review](docs/security.md), [architecture decision](docs/adr/001-reviewed-artifacts.md), [benchmark methodology](docs/benchmark.md) and [migration guide](docs/migration.md). Historical UI screenshots and source are retained for provenance, not offered as a supported deployment path.
 
-#### WebUI Options
+## RuV ecosystem
 
-- **Agentic Development**: Choose from different development approaches like microservices, serverless, monolithic, event-driven, API-first, and more.
-- **Create Dockerfile**: Input base image, packages to install, and generate a Dockerfile.
-- **Create Bash Script**: Define the script purpose and include necessary commands.
-- **Create Kubernetes Configuration**: Provide deployment name, container image, cluster name, and namespaces.
-- **Create CI/CD Pipeline**: Select a CI/CD provider and define stages for the pipeline.
-- **Azure Configuration**: Configure Azure services such as hosting, networking, IAM, database, storage, DevOps, AI & ML, monitoring, and security.
-- **AWS Configuration**: Configure AWS services like hosting, networking, IAM, and database.
-- **GCP Configuration**: Configure GCP services including hosting, networking, IAM, and database.
-- **Firebase Configuration**: Enable Firebase features for your project.
-- **Supabase Configuration**: Configure Supabase services such as hosting, authentication, storage, and database.
-- **Cloudflare Configuration**: Set up Cloudflare services for DNS, security, and workers.
-- **Developer Configuration**: Set up development environments for languages like Python, Node.js, Java, Rust, Go, C#, Ruby, PHP, and C++.
+Use [RuFlo](https://github.com/ruvnet/ruflo) for orchestration, [MetaHarness](https://github.com/ruvnet/metaharness) for repeatable evaluations, [Autogenous](https://github.com/ruvnet/autogenous) for evidence gates, [Guardrail](https://github.com/ruvnet/guardrail) for application policies, [Dynamo MCP](https://github.com/ruvnet/dynamo-mcp) for project scaffolding and [Federated MCP](https://github.com/ruvnet/federated-mcp) for public federation reads. [x.ruv.io](https://x.ruv.io) messages are data, never deployment permission.
 
-## WebUI
-![Agentic Engineering](https://github.com/ruvnet/agentic-devops/blob/main/assets/1.png?raw=true)
+MIT license. Legacy vendored components retain their own license notices.
 
-The Agentic DevOps tool also provides a web-based user interface (WebUI) for a more intuitive and visual experience. The WebUI uses the same menu structure as the CLI, making it easy to switch between the two interfaces.
+## Repository harness
 
-### Start the WebUI
-To start the WebUI, select "Start Agentic DevOps WebUI" from the Agentic DevOps menu.
-
-### Access the WebUI
-Open a web browser and navigate to `http://localhost:8501`.
-
-### WebUI Options
-- **Agentic Development**: Choose from different development approaches like microservices, serverless, monolithic, event-driven, API-first, and more.
-- **Create Dockerfile**: Input base image, packages to install, and generate a Dockerfile.
-- **Create Bash Script**: Define the script purpose and include necessary commands.
-- **Create Kubernetes Configuration**: Provide deployment name, container image, cluster name, and namespaces.
-- **Create CI/CD Pipeline**: Select a CI/CD provider and define stages for the pipeline.
-- **Azure Configuration**: Configure Azure services such as hosting, networking, IAM, database, storage, DevOps, AI & ML, monitoring, and security.
-- **AWS Configuration**: Configure AWS services like hosting, networking, IAM, and database.
-- **GCP Configuration**: Configure GCP services including hosting, networking, IAM, and database.
-- **Firebase Configuration**: Enable Firebase features for your project.
-- **Supabase Configuration**: Configure Supabase services such as hosting, authentication, storage, and database.
-- **Cloudflare Configuration**: Set up Cloudflare services for DNS, security, and workers.
-- **Developer Configuration**: Set up development environments for languages like Python, Node.js, Java, Rust, Go, C#, Ruby, PHP, and C++.
-
-## Advanced Usage
-
-For advanced users, the Agentic DevOps tool offers additional features and customization options:
-
-### Integration with CI/CD
-Integrate the tool with external CI/CD pipelines by including it in your build scripts and using its CLI commands.
-
-### Extending Functionality
-Extend the functionality by adding new modules and commands in `coder.py` and updating `main.py` to include these new commands.
-
-## Contributing
-
-Contributions to the Agentic DevOps tool are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request on the GitHub repository.
-
-## License
-
-The Agentic DevOps tool is open-source software licensed under the [MIT License](https://github.com/ruvnet/agentic-devops/blob/main/LICENSE).
+See the [generated MetaHarness guide](.harness/generated/README.md) and [Autogenous gate guide](.harness/autogenous/README.md). Generated sessions and field memory require deployment owned identity and storage configuration; their presence does not mean a remote memory service is deployed.

@@ -1,0 +1,35 @@
+name: Verify and deliver artifacts
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm audit --audit-level=moderate
+      - run: |
+          mkdir artifacts
+          node src/cli.mjs benchmark > artifacts/benchmark.json
+          node src/cli.mjs plan < examples/spec.json > artifacts/plan.json
+          node src/cli.mjs validate < artifacts/plan.json > artifacts/validation.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reviewed-deployment-artifacts-node-${{ matrix.node }}
+          path: artifacts/
+          retention-days: 14
